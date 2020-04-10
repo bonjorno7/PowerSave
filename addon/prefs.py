@@ -27,3 +27,11 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout.prop(self, "base_folder")
         layout.prop(self, "autosave_interval")
         layout.prop(self, "save_on_startup")
+
+
+def register():
+    bpy.utils.register_class(PowerSavePrefs)
+
+
+def unregister():
+    bpy.utils.unregister_class(PowerSavePrefs)
