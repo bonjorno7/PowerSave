@@ -1,5 +1,3 @@
-import bpy
-from . import utils
 from . import prefs
 from . import handlers
 from . import timers
