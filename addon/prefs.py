@@ -10,9 +10,11 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         subtype='FILE_PATH',
     )
 
-    autosave_interval: bpy.props.FloatProperty(
+    autosave_interval: bpy.props.IntProperty(
         name="Autosave Interval",
-        default=60.0,
+        default=60,
+        min=1,
+        max=3600,
     )
 
     save_on_startup: bpy.props.BoolProperty(
