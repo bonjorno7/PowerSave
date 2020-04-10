@@ -30,8 +30,14 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
 
 def register():
-    bpy.utils.register_class(PowerSavePrefs)
+    try:
+        bpy.utils.register_class(PowerSavePrefs)
+    except:
+        pass
 
 
 def unregister():
-    bpy.utils.unregister_class(PowerSavePrefs)
+    try:
+        bpy.utils.unregister_class(PowerSavePrefs)
+    except:
+        pass
