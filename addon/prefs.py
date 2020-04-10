@@ -12,9 +12,9 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     autosave_interval: bpy.props.IntProperty(
         name="Autosave Interval",
-        default=60,
+        default=5,
         min=1,
-        max=3600,
+        max=60,
     )
 
     save_on_startup: bpy.props.BoolProperty(
