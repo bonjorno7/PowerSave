@@ -10,4 +10,4 @@ def get_prefs():
 
 
 def randint():
-    return random.randint(0, 100)
+    return random.randint(1, 10)
