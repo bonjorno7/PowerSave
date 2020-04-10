@@ -6,4 +6,4 @@ def autosave_timer():
     prefs = utils.get_prefs()
     randint = utils.randint()
     prefs.autosave_interval = randint
-    return 1.0
+    return prefs.autosave_interval
