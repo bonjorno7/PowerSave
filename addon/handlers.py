@@ -5,13 +5,14 @@ from . import timers
 
 @bpy.app.handlers.persistent
 def load_handler(dummy):
-    print('FILE LOADED')
+    prefs = utils.get_prefs()
 
-    timers.register()
-
-    if not bpy.data.is_saved:
-        path = "C:\\Users\\Jorijn\\Documents\\Blender\\PowerSave\\test01.blend"
+    if prefs.save_on_startup and not bpy.data.is_saved:
+        path = "C:/Users/Jorijn/Documents/Blender/PowerSave/test01.blend"
         bpy.ops.wm.save_mainfile(filepath=path, check_existing=False)
+
+    timers.unregister()
+    timers.register()
 
 
 def register():
