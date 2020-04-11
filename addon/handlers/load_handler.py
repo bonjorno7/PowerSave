@@ -9,7 +9,7 @@ from .. import timers
 def load_handler(dummy):
     prefs = common.get_prefs()
 
-    if prefs.save_on_startup and not bpy.data.is_saved:
+    if prefs.save_on_startup and prefs.base_folder and not bpy.data.is_saved:
         name = common.get_datetime(prefs.datetime_format)
         path = pathlib.Path(prefs.base_folder).joinpath(name)
         os.makedirs(str(path.parent), exist_ok=True)
