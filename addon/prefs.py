@@ -29,6 +29,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     def draw(self, context):
         layout = self.layout
+        layout.label(text="Test", icon_value=utils.get_icon())
         layout.prop(self, "base_folder")
         layout.prop(self, "autosave_interval")
         layout.prop(self, "save_on_startup")
