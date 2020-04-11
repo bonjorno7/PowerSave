@@ -1,13 +1,13 @@
 import bpy
 import datetime
-from . import icons
+from .. import icons
 
 
-addon_name = __name__.partition('.')[0]
+module_name = __name__.partition('.')[0]
 
 
 def get_prefs():
-    return bpy.context.preferences.addons[addon_name].preferences
+    return bpy.context.preferences.addons[module_name].preferences
 
 
 def get_datetime(string: str="%Y-%m-%d__%H-%M-%S"):

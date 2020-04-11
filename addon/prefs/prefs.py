@@ -1,9 +1,9 @@
 import bpy
-from . import utils
+from .. utils import common
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
-    bl_idname = utils.addon_name
+    bl_idname = common.module_name
 
     base_folder: bpy.props.StringProperty(
         name="Base Folder",
@@ -29,22 +29,8 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Test", icon_value=utils.get_icon())
+        layout.label(text="Test", icon_value=common.get_icon())
         layout.prop(self, "base_folder")
         layout.prop(self, "autosave_interval")
         layout.prop(self, "save_on_startup")
         layout.prop(self, "datetime_format")
-
-
-def register():
-    try:
-        bpy.utils.register_class(PowerSavePrefs)
-    except:
-        pass
-
-
-def unregister():
-    try:
-        bpy.utils.unregister_class(PowerSavePrefs)
-    except:
-        pass
