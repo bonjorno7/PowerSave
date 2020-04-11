@@ -10,13 +10,9 @@ def load_handler(dummy):
     prefs = utils.get_prefs()
 
     if prefs.save_on_startup and not bpy.data.is_saved:
-        name = utils.get_datetime("%Y-%m-%d/%Y-%m-%d__%H-%M-%S__01.blend")
+        name = utils.get_datetime(prefs.datetime_format)
         path = pathlib.Path(prefs.base_folder).joinpath(name)
-
-        folder = str(path.parent)
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
-
+        os.makedirs(str(path.parent), exist_ok=True)
         bpy.ops.wm.save_mainfile(filepath=str(path))
 
     timers.unregister()

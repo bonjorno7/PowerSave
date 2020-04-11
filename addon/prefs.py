@@ -22,11 +22,17 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default=True,
     )
 
+    datetime_format: bpy.props.StringProperty(
+        name="Datetime Format",
+        default="%Y-%m/%m-%d__%H-%M__01.blend",
+    )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "base_folder")
         layout.prop(self, "autosave_interval")
         layout.prop(self, "save_on_startup")
+        layout.prop(self, "datetime_format")
 
 
 def register():
