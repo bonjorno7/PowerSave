@@ -14,6 +14,7 @@ def load_handler(dummy):
         path = pathlib.Path(prefs.base_folder).joinpath(name)
         os.makedirs(str(path.parent), exist_ok=True)
         bpy.ops.wm.save_mainfile(filepath=str(path))
+        common.tag_redraw()
 
     timers.unregister()
     timers.register()
