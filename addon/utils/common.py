@@ -17,7 +17,7 @@ def get_datetime(string: str="%Y-%m-%d__%H-%M-%S"):
 def get_icon():
     if bpy.data.is_saved:
         if bpy.data.is_dirty:
-            icon = "blue"
+            icon = "gray"
         else:
             icon = "green"
     else:
