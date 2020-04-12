@@ -1,5 +1,4 @@
 import bpy
-import os
 import pathlib
 from .. import utils
 from .. import timers
@@ -14,7 +13,7 @@ def load_handler(dummy):
         path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
 
         try:
-            os.makedirs(str(path.parent), exist_ok=True)
+            path.parent.mkdir(parents=True, exist_ok=True)
             bpy.ops.wm.save_mainfile(filepath=str(path))
 
         except:
