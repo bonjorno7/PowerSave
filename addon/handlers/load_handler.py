@@ -10,7 +10,7 @@ def load_handler(dummy):
     prefs = utils.common.get_prefs()
 
     if prefs.save_on_startup and prefs.base_folder and not bpy.data.is_saved:
-        name = utils.common.get_datetime(prefs.datetime_format)
+        name = f"{utils.common.get_datetime(prefs.datetime_format)}.blend"
         path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
 
         try:
