@@ -19,5 +19,5 @@ def get_default_folder():
     return str(pathlib.Path(temporary_directory).joinpath("PowerSave"))
 
 
-def get_datetime(string: str="%Y-%m-%d__%H-%M-%S"):
+def get_datetime(string: str="%Y %m %d %H %M %S"):
     return datetime.datetime.now().strftime(string)
