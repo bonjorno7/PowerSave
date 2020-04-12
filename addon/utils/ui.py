@@ -19,3 +19,17 @@ def tag_redraw():
         for area in window.screen.areas:
             if area.type == 'VIEW_3D':
                 area.tag_redraw()
+
+
+def draw_prop(layout, text, data, prop):
+    row = layout.row()
+    row.label(text=text)
+    row.prop(data, prop, text="")
+
+
+def draw_bool(layout, text, data, prop):
+    row = layout.row()
+    row.label(text=text)
+    col = row.column()
+    col.alignment = 'RIGHT'
+    col.prop(data, prop, text="")
