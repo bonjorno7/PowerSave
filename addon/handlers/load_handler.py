@@ -11,10 +11,11 @@ def load_handler(dummy):
 
     if prefs.save_on_startup and prefs.base_folder and not bpy.data.is_saved:
         name = common.get_datetime(prefs.datetime_format)
-        path = pathlib.Path(prefs.base_folder).joinpath(name)
-        os.makedirs(str(path.parent), exist_ok=True)
-        bpy.ops.wm.save_mainfile(filepath=str(path))
-        common.tag_redraw()
+        path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
 
-    timers.unregister()
-    timers.register()
+        try:
+            os.makedirs(str(path.parent), exist_ok=True)
+            bpy.ops.wm.save_mainfile(filepath=str(path))
+
+        except:
+            print(f"Failed to save to {path}")
