@@ -1,14 +1,14 @@
 import bpy
-from .. utils import common
+from .. import utils
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
-    bl_idname = common.module_name
+    bl_idname = utils.common.module_name
 
     base_folder: bpy.props.StringProperty(
         name="Base Folder",
         description="The directory where initial saves will be stored",
-        default=common.get_default_folder(),
+        default=utils.common.get_default_folder(),
         subtype='FILE_PATH',
     )
 
@@ -28,7 +28,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     datetime_format: bpy.props.StringProperty(
         name="Datetime Format",
-        description=common.description(
+        description=utils.common.description(
             "The formatting string used to create file names",
             "%Y = year    %m = month    %d = day",
             "%H = hour    %M = minute    %S = second",
@@ -38,7 +38,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Test", icon_value=common.get_icon())
+        layout.label(text="Test", icon_value=utils.ui.get_icon())
         layout.prop(self, "base_folder")
         layout.prop(self, "autosave_interval")
         layout.prop(self, "save_on_startup")
