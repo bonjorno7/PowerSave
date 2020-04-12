@@ -33,3 +33,9 @@ def draw_bool(layout, text, data, prop):
     col = row.column()
     col.alignment = 'RIGHT'
     col.prop(data, prop, text="")
+
+
+def draw_op(layout, text, operator, options):
+    op = layout.operator(operator, text=text)
+    for key, value in options.items():
+        op[key] = value
