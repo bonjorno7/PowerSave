@@ -32,7 +32,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
             "The formatting string used to create file names",
             "Read the datetime documentation for details",
         ),
-        default="%Y-%m-%d__%H-%M-%S__01.blend",
+        default="%A %d-%B-%Y %H.%M",
     )
 
     def draw(self, context):
