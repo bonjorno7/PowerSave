@@ -13,7 +13,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     autosave_interval: bpy.props.IntProperty(
         name="Autosave Interval",
-        default=5,
+        default=2,
         min=1,
         max=60,
     )
@@ -25,7 +25,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     datetime_format: bpy.props.StringProperty(
         name="Datetime Format",
-        default="%Y-%m/%m-%d__%H-%M__01.blend",
+        default="%Y-%m-%d__%H-%M-%S__01.blend",
     )
 
     def draw(self, context):
