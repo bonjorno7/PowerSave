@@ -30,8 +30,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         name="Datetime Format",
         description=utils.common.description(
             "The formatting string used to create file names",
-            "%Y = year    %m = month    %d = day",
-            "%H = hour    %M = minute    %S = second",
+            "Read the datetime documentation for details",
         ),
         default="%Y-%m-%d__%H-%M-%S__01.blend",
     )
@@ -42,3 +41,6 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_prop(layout, "Autosave Interval", self, "autosave_interval")
         utils.ui.draw_bool(layout, "Save On Startup", self, "save_on_startup")
         utils.ui.draw_prop(layout, "Datetime Format", self, "datetime_format")
+
+        url = "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes"
+        utils.ui.draw_op(layout, "Datetime Documentation", "wm.url_open", {"url": url})
