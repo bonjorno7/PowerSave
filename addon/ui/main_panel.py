@@ -15,6 +15,11 @@ class PowerSavePanel(bpy.types.Panel):
         if self.is_popover:
             layout.ui_units_x = 8
 
+        prefs = common.get_prefs()
+
+        layout.prop(prefs, "autosave_interval")
+        layout.prop(prefs, "save_on_startup")
+
 
 def popover(self, context):
     layout = self.layout
