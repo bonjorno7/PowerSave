@@ -1,5 +1,4 @@
 import bpy
-import pathlib
 import datetime
 
 
@@ -12,11 +11,6 @@ def get_prefs():
 
 def description(*args):
     return ".\n".join(args)
-
-
-def get_default_folder():
-    temporary_directory = bpy.context.preferences.filepaths.temporary_directory
-    return str(pathlib.Path(temporary_directory).joinpath("PowerSave"))
 
 
 def get_datetime(string):

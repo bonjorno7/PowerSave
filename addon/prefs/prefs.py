@@ -8,7 +8,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
     base_folder: bpy.props.StringProperty(
         name="Base Folder",
         description="The directory where initial saves will be stored",
-        default=utils.common.get_default_folder(),
+        default=utils.files.get_default_folder(),
         subtype='FILE_PATH',
     )
 
