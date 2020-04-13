@@ -15,6 +15,7 @@ def load_handler(dummy):
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
             bpy.ops.wm.save_mainfile(filepath=str(path))
+            utils.files.add_to_recent_files()
 
         except:
-            print(f"Failed to save to {path}")
+            print(f"Failed to save {path}")
