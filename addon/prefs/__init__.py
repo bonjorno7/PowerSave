@@ -3,14 +3,8 @@ from . import prefs
 
 
 def register():
-    try:
-        bpy.utils.register_class(prefs.PowerSavePrefs)
-    except:
-        pass
+    bpy.utils.register_class(prefs.PowerSavePrefs)
 
 
 def unregister():
-    try:
-        bpy.utils.unregister_class(prefs.PowerSavePrefs)
-    except:
-        pass
+    bpy.utils.unregister_class(prefs.PowerSavePrefs)
