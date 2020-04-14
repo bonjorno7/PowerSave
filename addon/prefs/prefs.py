@@ -32,13 +32,13 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
             "The formatting string used to create file names",
             "Read the datetime documentation for details",
         ),
-        default="%A %d-%B-%Y %H.%M",
+        default="%A_%d-%B-%Y_%H.%M",
     )
 
     increment_format: bpy.props.StringProperty(
         name='Increment Format',
         description='What characters to put before the increment number and how many zeroes to pad it with',
-        default=' 01',
+        default='_01',
     )
 
     def draw(self, context):
