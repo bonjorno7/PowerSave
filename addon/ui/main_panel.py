@@ -10,15 +10,29 @@ class PowerSavePanel(bpy.types.Panel):
     bl_region_type = 'UI'
 
     def draw(self, context):
+        prefs = utils.common.get_prefs()
+
         layout = self.layout
 
         if self.is_popover:
             layout.ui_units_x = 8
 
-        prefs = utils.common.get_prefs()
+        col = layout.column()
 
-        layout.prop(prefs, "autosave_interval")
-        layout.prop(prefs, "save_on_startup")
+        col.label(text="Preferences")
+        box = col.box().column()
+
+        box.prop(prefs, "autosave_interval")
+        box.prop(prefs, "save_on_startup")
+
+        col.separator()
+
+        col.label(text="Operators")
+        box = col.box().column()
+
+        box.operator("powersave.save_datetime")
+        box.operator("powersave.save_incremental")
+        box.operator("powersave.open_project_folder")
 
 
 def popover(self, context):
