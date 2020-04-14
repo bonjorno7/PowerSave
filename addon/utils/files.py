@@ -30,16 +30,25 @@ def add_to_recent_files():
 
 
 def open_project_folder():
+    if not bpy.data.is_saved:
+        return ({'WARNING'}, "Unsaved file", {'CANCELLED'})
+
     path = str(pathlib.Path(bpy.data.filepath).parent)
 
-    if sys.platform == "win32":
-        subprocess.Popen(["explorer", path])
+    try:
+        if sys.platform == "win32":
+            subprocess.Popen(["explorer", path])
 
-    elif sys.platform == "linux":
-        subprocess.Popen(["xdg-open", path])
+        elif sys.platform == "linux":
+            subprocess.Popen(["xdg-open", path])
 
-    elif sys.platform == "darwin":
-        subprocess.Popen(["open", path])
+        elif sys.platform == "darwin":
+            subprocess.Popen(["open", path])
 
-    else:
-        print("Failed to open project folder")
+        else:
+            return ({'WARNING'}, "Unsupported platform", {'CANCELLED'})
+
+    except:
+        return ({'ERROR'}, "Failed to open project folder", {'CANCELLED'})
+
+    return ({'INFO'}, "Opened project folder", {'FINISHED'})
