@@ -1,5 +1,6 @@
 import bpy
 import pathlib
+import re
 from .. import utils
 
 
@@ -31,7 +32,24 @@ def save_incremental():
         prefs = utils.common.get_prefs()
 
         path = pathlib.Path(bpy.data.filepath).resolve()
-        path = path.parent.joinpath(path.stem + "_01.blend")
+        numbers = re.findall(r"\d+", str(path))
+
+        if numbers:
+            path = str(path)
+            last = numbers[-1]
+
+            index = path.rfind(last)
+            length = len(last)
+            number = str(int(last) + 1)
+
+            start = index + max(length - len(number), 0)
+            end = index + length
+
+            path = f"{path[:start]}{number}{path[end:]}"
+            path = pathlib.Path(path)
+
+        else:
+            path = path.parent.joinpath(path.stem + "_01.blend")
 
         try:
             bpy.ops.wm.save_mainfile(filepath=str(path))
