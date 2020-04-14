@@ -9,7 +9,7 @@ def save_datetime():
         prefs = utils.common.get_prefs()
 
         if prefs.base_folder:
-            name = f"{utils.common.get_datetime()}.blend"
+            name = f"{utils.common.get_filename()}.blend"
             path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
 
             try:
@@ -49,7 +49,7 @@ def save_incremental():
             path = pathlib.Path(path)
 
         else:
-            path = path.parent.joinpath(path.stem + "_01.blend")
+            path = path.parent.joinpath(f"{path.stem}{utils.common.get_increment}.blend")
 
         try:
             bpy.ops.wm.save_mainfile(filepath=str(path))
