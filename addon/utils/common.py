@@ -13,5 +13,6 @@ def description(*args):
     return ".\n".join(args)
 
 
-def get_datetime(string):
+def get_datetime():
+    string = get_prefs().datetime_format
     return datetime.datetime.now().strftime(string)

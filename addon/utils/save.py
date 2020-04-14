@@ -9,7 +9,7 @@ def save_datetime():
         prefs = utils.common.get_prefs()
 
         if prefs.base_folder:
-            name = f"{utils.common.get_datetime(prefs.datetime_format)}.blend"
+            name = f"{utils.common.get_datetime()}.blend"
             path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
 
             try:
