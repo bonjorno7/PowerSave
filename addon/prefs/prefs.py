@@ -35,12 +35,20 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default="%A %d-%B-%Y %H.%M",
     )
 
+    increment_format: bpy.props.StringProperty(
+        name='Increment Format',
+        description='What characters to put before the increment number and how many zeroes to pad it with',
+        default=' 01',
+    )
+
     def draw(self, context):
         layout = self.layout
+
         utils.ui.draw_prop(layout, "Base Folder", self, "base_folder")
         utils.ui.draw_prop(layout, "Autosave Interval", self, "autosave_interval")
         utils.ui.draw_bool(layout, "Save On Startup", self, "save_on_startup")
         utils.ui.draw_prop(layout, "Datetime Format", self, "datetime_format")
+        utils.ui.draw_prop(layout, "Increment Format", self, "increment_format")
 
         url = "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes"
         utils.ui.draw_op(layout, "Datetime Documentation", "wm.url_open", {"url": url})
