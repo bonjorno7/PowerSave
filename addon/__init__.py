@@ -1,21 +1,24 @@
 from . import icons
 from . import prefs
-from . import handlers
+from . import ops
 from . import timers
+from . import handlers
 from . import ui
 
 
 def register():
     icons.register()
     prefs.register()
-    handlers.register()
+    ops.register()
     timers.register()
+    handlers.register()
     ui.register()
 
 
 def unregister():
     ui.unregister()
-    timers.unregister()
     handlers.unregister()
+    timers.unregister()
+    ops.unregister()
     prefs.unregister()
     icons.unregister()
