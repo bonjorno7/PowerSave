@@ -33,21 +33,8 @@ def open_project_folder():
     if not bpy.data.is_saved:
         return ({'WARNING'}, "Unsaved file", {'CANCELLED'})
 
-    path = str(pathlib.Path(bpy.data.filepath).parent)
-
     try:
-        if sys.platform == "win32":
-            subprocess.Popen(["explorer", path])
-
-        elif sys.platform == "linux":
-            subprocess.Popen(["xdg-open", path])
-
-        elif sys.platform == "darwin":
-            subprocess.Popen(["open", path])
-
-        else:
-            return ({'WARNING'}, "Unsupported platform", {'CANCELLED'})
-
+        bpy.ops.wm.url_open(url=str(pathlib.Path(bpy.data.filepath).parent))
     except:
         return ({'ERROR'}, "Failed to open project folder", {'CANCELLED'})
 
