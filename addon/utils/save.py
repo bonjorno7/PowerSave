@@ -35,8 +35,8 @@ def save_datetime():
 
         if prefs.base_folder:
             name = f"{utils.common.get_filename()}.blend"
-            path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
-            path = increment_until_unique(path)
+            path = pathlib.Path(prefs.base_folder).joinpath(name)
+            path = increment_until_unique(path.resolve())
 
             try:
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -55,8 +55,8 @@ def save_datetime():
 
 def save_incremental():
     if bpy.data.is_saved:
-        path = pathlib.Path(bpy.data.filepath).resolve()
-        path = increment_until_unique(path)
+        path = pathlib.Path(bpy.data.filepath)
+        path = increment_until_unique(path.resolve())
 
         try:
             bpy.ops.wm.save_mainfile(filepath=str(path))
