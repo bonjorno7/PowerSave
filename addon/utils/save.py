@@ -36,6 +36,28 @@ def increment_until_unique(path: pathlib.Path):
     return path
 
 
+def powersave():
+    prefs = utils.common.get_prefs()
+
+    if prefs.base_folder:
+        name = f'{prefs.powersave_name}.blend'
+        path = pathlib.Path(prefs.base_folder).joinpath(name)
+        path = increment_until_unique(path)
+        path = sanitize_path(path)
+
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            bpy.ops.wm.save_mainfile(filepath=str(path))
+            utils.files.add_to_recent_files()
+
+        except:
+            return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
+
+        return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
+
+    return ({'WARNING'}, "No base folder set", {'CANCELLED'})
+
+
 def save_datetime():
     if not bpy.data.is_saved:
         prefs = utils.common.get_prefs()
