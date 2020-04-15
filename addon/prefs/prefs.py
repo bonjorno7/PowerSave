@@ -47,6 +47,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='_01',
     )
 
+    powersave_name: bpy.props.StringProperty(
+        name="PowerSave Name",
+        description="The name to use for PowerSave",
+        default="",
+    )
+
     def draw(self, context):
         layout = self.layout
 
