@@ -29,7 +29,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
     save_on_startup: bpy.props.BoolProperty(
         name="Save on Startup",
         description="Whether to save new projects in your base folder automatically",
-        default=True,
+        default=False,
     )
 
     datetime_format: bpy.props.StringProperty(
