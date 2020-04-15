@@ -4,6 +4,31 @@ import re
 from .. import utils
 
 
+def increment_until_unique(path: pathlib.Path):
+    while path.is_file():
+        numbers = re.findall(r"\d+", str(path.stem))
+
+        if numbers:
+            path = str(path)
+            last = numbers[-1]
+
+            index = path.rfind(last)
+            length = len(last)
+            number = str(int(last) + 1)
+
+            start = index + max(length - len(number), 0)
+            end = index + length
+
+            path = f"{path[:start]}{number}{path[end:]}"
+            path = pathlib.Path(path)
+
+        else:
+            name = f"{path.stem}{utils.common.get_increment()}.blend"
+            path = path.parent.joinpath(name)
+
+    return path
+
+
 def save_datetime():
     if not bpy.data.is_saved:
         prefs = utils.common.get_prefs()
@@ -11,6 +36,7 @@ def save_datetime():
         if prefs.base_folder:
             name = f"{utils.common.get_filename()}.blend"
             path = pathlib.Path(prefs.base_folder).joinpath(name).resolve()
+            path = increment_until_unique(path)
 
             try:
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -29,27 +55,8 @@ def save_datetime():
 
 def save_incremental():
     if bpy.data.is_saved:
-        prefs = utils.common.get_prefs()
-
         path = pathlib.Path(bpy.data.filepath).resolve()
-        numbers = re.findall(r"\d+", str(path.stem))
-
-        if numbers:
-            path = str(path)
-            last = numbers[-1]
-
-            index = path.rfind(last)
-            length = len(last)
-            number = str(int(last) + 1)
-
-            start = index + max(length - len(number), 0)
-            end = index + length
-
-            path = f"{path[:start]}{number}{path[end:]}"
-            path = pathlib.Path(path)
-
-        else:
-            path = path.parent.joinpath(f"{path.stem}{utils.common.get_increment()}.blend")
+        path = increment_until_unique(path)
 
         try:
             bpy.ops.wm.save_mainfile(filepath=str(path))
