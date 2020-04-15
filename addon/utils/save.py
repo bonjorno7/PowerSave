@@ -32,7 +32,7 @@ def save_incremental():
         prefs = utils.common.get_prefs()
 
         path = pathlib.Path(bpy.data.filepath).resolve()
-        numbers = re.findall(r"\d+", str(path))
+        numbers = re.findall(r"\d+", str(path.stem))
 
         if numbers:
             path = str(path)
@@ -49,7 +49,7 @@ def save_incremental():
             path = pathlib.Path(path)
 
         else:
-            path = path.parent.joinpath(f"{path.stem}{utils.common.get_increment}.blend")
+            path = path.parent.joinpath(f"{path.stem}{utils.common.get_increment()}.blend")
 
         try:
             bpy.ops.wm.save_mainfile(filepath=str(path))
