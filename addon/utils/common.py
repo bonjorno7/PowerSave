@@ -1,6 +1,7 @@
 import bpy
 import datetime
 import re
+from ... import bl_info
 
 
 module_name = __name__.partition('.')[0]
@@ -8,6 +9,10 @@ module_name = __name__.partition('.')[0]
 
 def get_prefs():
     return bpy.context.preferences.addons[module_name].preferences
+
+
+def get_version():
+    return "".join(str(n) for n in bl_info["version"])
 
 
 def description(*args):

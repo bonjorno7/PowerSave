@@ -5,7 +5,7 @@ from .. import utils
 class PowerSavePanel(bpy.types.Panel):
     bl_idname = "POWERSAVE_PT_PowerSavePanel"
     bl_category = "PowerSave"
-    bl_label = "PowerSave"
+    bl_label = f"PowerSave {utils.common.get_version()}"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
 
