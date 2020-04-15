@@ -1,16 +1,14 @@
 import bpy
 import pathlib
 import string
-import os
 import re
 from .. import utils
 
 
 def sanitize_path(path: pathlib.Path):
-    path = str(path.resolve())
-    valid = f"-_.() {string.ascii_letters}{string.digits}{os.sep}"
-    path = "".join(c if c in valid else "_" for c in path)
-    return pathlib.Path(path)
+    valid = f"-_.() {string.ascii_letters}{string.digits}"
+    name = "".join(c if c in valid else "_" for c in path.name)
+    return path.parent.resolve().joinpath(name)
 
 
 def increment_until_unique(path: pathlib.Path):
