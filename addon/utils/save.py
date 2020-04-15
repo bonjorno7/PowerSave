@@ -59,9 +59,10 @@ def save_incremental():
         path = increment_until_unique(path.resolve())
 
         try:
+            path.parent.mkdir(parents=True, exist_ok=True)
             bpy.ops.wm.save_mainfile(filepath=str(path))
             utils.files.add_to_recent_files()
-        
+
         except:
             return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
 
