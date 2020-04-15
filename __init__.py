@@ -17,7 +17,7 @@ bl_info = {
     "author": "bonjorno7",
     "description": "Autosave and such",
     "blender": (2, 80, 0),
-    "version": (0, 1, 1),
+    "version": (0, 1, 2),
     "location": "",
     "warning": "",
     "category": "System"
