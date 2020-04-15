@@ -20,14 +20,14 @@ def description(*args):
 
 
 def get_datetime():
-    string = get_prefs().datetime_format
-    return datetime.datetime.now().strftime(string)
+    form = get_prefs().datetime_format
+    return datetime.datetime.now().strftime(form)
 
 
 def get_increment():
-    string = get_prefs().increment_format
-    numbers = re.findall(r"\d+", string)
-    return string if numbers else f"{string}1"
+    form = get_prefs().increment_format
+    numbers = re.findall(r"\d+", form)
+    return form if numbers else f"{form}1"
 
 
 def get_datetime_increment():
