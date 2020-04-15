@@ -34,7 +34,7 @@ def save_datetime():
         prefs = utils.common.get_prefs()
 
         if prefs.base_folder:
-            name = f"{utils.common.get_filename()}.blend"
+            name = f"{utils.common.get_datetime_increment()}.blend"
             path = pathlib.Path(prefs.base_folder).joinpath(name)
             path = increment_until_unique(path.resolve())
 

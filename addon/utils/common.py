@@ -30,5 +30,5 @@ def get_increment():
     return string if numbers else f"{string}1"
 
 
-def get_filename():
+def get_datetime_increment():
     return f"{get_datetime()}{get_increment()}"
