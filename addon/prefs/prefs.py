@@ -12,6 +12,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         subtype='FILE_PATH',
     )
 
+    use_autosave: bpy.props.BoolProperty(
+        name="Use Autosave",
+        description="Whether to periodically save the file",
+        default=True,
+    )
+
     autosave_interval: bpy.props.IntProperty(
         name="Autosave Interval",
         description="The amount of minutes between each autosave",
@@ -45,6 +51,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout = self.layout
 
         utils.ui.draw_prop(layout, "Base Folder", self, "base_folder")
+        utils.ui.draw_prop(layout, "Use Autosave", self, "use_autosave")
         utils.ui.draw_prop(layout, "Autosave Interval", self, "autosave_interval")
         utils.ui.draw_bool(layout, "Save On Startup", self, "save_on_startup")
         utils.ui.draw_prop(layout, "Datetime Format", self, "datetime_format")

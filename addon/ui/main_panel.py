@@ -22,6 +22,7 @@ class PowerSavePanel(bpy.types.Panel):
         col.label(text="Preferences")
         box = col.box().column()
 
+        box.prop(prefs, "use_autosave")
         box.prop(prefs, "autosave_interval")
         box.prop(prefs, "save_on_startup")
 
