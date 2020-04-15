@@ -1,6 +1,7 @@
 import bpy
 import datetime
 import re
+import pathlib
 from ... import bl_info
 
 
@@ -32,3 +33,8 @@ def get_increment():
 
 def get_datetime_increment():
     return f"{get_datetime()}{get_increment()}"
+
+
+def update_powersave_name():
+    name = pathlib.Path(bpy.data.filepath).stem
+    get_prefs().powersave_name = name
