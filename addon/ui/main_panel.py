@@ -19,12 +19,11 @@ class PowerSavePanel(bpy.types.Panel):
 
         col = layout.column()
 
-        col.label(text="Preferences")
+        col.label(text="PowerSave")
         box = col.box().column()
 
-        box.prop(prefs, "use_autosave")
-        box.prop(prefs, "autosave_interval")
-        box.prop(prefs, "save_on_startup")
+        box.operator("powersave.powersave")
+        box.prop(prefs, "powersave_name", text="")
 
         col.separator()
 
@@ -34,6 +33,15 @@ class PowerSavePanel(bpy.types.Panel):
         box.operator("powersave.save_datetime")
         box.operator("powersave.save_incremental")
         box.operator("powersave.open_project_folder")
+
+        col.separator()
+
+        col.label(text="Preferences")
+        box = col.box().column()
+
+        box.prop(prefs, "use_autosave")
+        box.prop(prefs, "autosave_interval")
+        box.prop(prefs, "save_on_startup")
 
 
 def popover(self, context):
