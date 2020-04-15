@@ -5,6 +5,7 @@ from .. import utils
 class SaveDatetime(bpy.types.Operator):
     bl_idname = "powersave.save_datetime"
     bl_label = "Save Datetime"
+    bl_description = "Save this blend file in your PowerSave folder with a name based on the current date and time"
 
     @classmethod
     def poll(cls, context):
