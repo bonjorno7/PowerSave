@@ -5,11 +5,11 @@ from .. import utils
 class PowerSave(bpy.types.Operator):
     bl_idname = "powersave.powersave"
     bl_label = "PowerSave"
-    bl_description = "Save this blend file in your PowerSave folder with the chosen name"
-
-    @classmethod
-    def poll(cls, context):
-        return utils.common.get_prefs().powersave_name
+    bl_description = utils.common.description(
+        "Save this blend file with the name in the text field below",
+        "If no name is provided, generate one based on the date and time",
+        "If this blend has never been saved, put it in the PowerSave folder",
+    )
 
     def execute(self, context):
         result = utils.save.powersave()
