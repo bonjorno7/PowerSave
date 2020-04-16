@@ -39,9 +39,9 @@ def powersave():
     prefs = utils.common.get_prefs()
 
     if bpy.data.filepath:
-        path = bpy.data.filepath
+        path = pathlib.Path(bpy.data.filepath).parent
     else:
-        path = prefs.base_folder
+        path = pathlib.Path(prefs.base_folder)
 
     if prefs.powersave_name:
         name = prefs.powersave_name
@@ -50,7 +50,7 @@ def powersave():
 
     if path:
         name = f'{name.replace(".blend", "")}.blend'
-        path = pathlib.Path(path).joinpath(name)
+        path = path.joinpath(name)
         path = increment_until_unique(path)
         path = sanitize_path(path)
 
