@@ -5,12 +5,6 @@ import re
 from .. import utils
 
 
-def sanitize_path(path: pathlib.Path):
-    valid = f"-_.() {string.ascii_letters}{string.digits}"
-    name = "".join(c if c in valid else "_" for c in path.name)
-    return path.parent.resolve().joinpath(name)
-
-
 def increment_until_unique(path: pathlib.Path):
     while path.is_file():
         numbers = re.findall(r"\d+", str(path.stem))
@@ -36,12 +30,28 @@ def increment_until_unique(path: pathlib.Path):
     return path
 
 
+def sanitize_path(path: pathlib.Path):
+    valid = f"-_.() {string.ascii_letters}{string.digits}"
+    name = "".join(c if c in valid else "_" for c in path.name)
+    return path.parent.resolve().joinpath(name)
+
+
 def powersave():
     prefs = utils.common.get_prefs()
 
-    if prefs.base_folder:
-        name = f'{prefs.powersave_name}.blend'
-        path = pathlib.Path(prefs.base_folder).joinpath(name)
+    if bpy.data.filepath:
+        path = bpy.data.filepath
+    else:
+        path = prefs.base_folder
+
+    if prefs.powersave_name:
+        name = prefs.powersave_name
+    else:
+        name = utils.common.get_datetime_increment()
+
+    if path:
+        name = f'{name.replace(".blend", "")}.blend'
+        path = pathlib.Path(path).joinpath(name)
         path = increment_until_unique(path)
         path = sanitize_path(path)
 
@@ -56,47 +66,3 @@ def powersave():
         return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
 
     return ({'WARNING'}, "No base folder set", {'CANCELLED'})
-
-
-def save_datetime():
-    if not bpy.data.is_saved:
-        prefs = utils.common.get_prefs()
-
-        if prefs.base_folder:
-            name = f"{utils.common.get_datetime_increment()}.blend"
-            path = pathlib.Path(prefs.base_folder).joinpath(name)
-            path = increment_until_unique(path)
-            path = sanitize_path(path)
-
-            try:
-                path.parent.mkdir(parents=True, exist_ok=True)
-                bpy.ops.wm.save_mainfile(filepath=str(path))
-                utils.files.add_to_recent_files()
-
-            except:
-                return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
-
-            return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
-
-        return ({'WARNING'}, "No base folder set", {'CANCELLED'})
-
-    return ({'WARNING'}, "File is already saved", {'CANCELLED'})
-
-
-def save_incremental():
-    if bpy.data.is_saved:
-        path = pathlib.Path(bpy.data.filepath)
-        path = increment_until_unique(path)
-        path = sanitize_path(path)
-
-        try:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            bpy.ops.wm.save_mainfile(filepath=str(path))
-            utils.files.add_to_recent_files()
-
-        except:
-            return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
-
-        return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
-
-    return ({'WARNING'}, "Unsaved file", {'CANCELLED'})
