@@ -38,7 +38,7 @@ def sanitize_path(path: pathlib.Path):
 def powersave():
     prefs = utils.common.get_prefs()
 
-    if bpy.data.filepath:
+    if bpy.data.is_saved:
         path = pathlib.Path(bpy.data.filepath).parent
     else:
         path = pathlib.Path(prefs.base_folder)
