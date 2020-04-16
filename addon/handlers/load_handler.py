@@ -9,5 +9,5 @@ def load_handler(dummy):
     utils.common.update_powersave_name()
 
     if prefs.save_on_startup:
-        result = utils.save.save_datetime()
+        result = utils.save.powersave()
         print(result[1])
