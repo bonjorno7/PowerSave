@@ -7,24 +7,23 @@ from .. import utils
 
 def increment_until_unique(path: pathlib.Path):
     while path.is_file():
-        numbers = re.findall(r"\d+", str(path.stem))
+        stem = path.stem
+        numbers = re.findall(r"\d+", stem)
 
         if numbers:
-            path = str(path)
             last = numbers[-1]
-
-            index = path.rfind(last)
             length = len(last)
             number = str(int(last) + 1)
 
+            index = stem.rfind(last)
             start = index + max(length - len(number), 0)
             end = index + length
 
-            path = f"{path[:start]}{number}{path[end:]}"
-            path = pathlib.Path(path)
+            name = f"{stem[:start]}{number}{stem[end:]}.blend"
+            path = path.parent.joinpath(name)
 
         else:
-            name = f"{path.stem}{utils.common.get_increment()}.blend"
+            name = f"{stem}{utils.common.get_increment()}.blend"
             path = path.parent.joinpath(name)
 
     return path
