@@ -1,8 +1,15 @@
 import bpy
 import pathlib
-import string
 import re
 from .. import utils
+
+
+def sanitize_path(path: pathlib.Path):
+    path = path.resolve()
+    anchor = pathlib.Path(path.anchor)
+    path = str(path)[len(path.anchor):]
+    path = utils.common.sanitize(path)
+    return anchor.joinpath(path)
 
 
 def increment_until_unique(path: pathlib.Path):
@@ -29,12 +36,6 @@ def increment_until_unique(path: pathlib.Path):
     return path
 
 
-def sanitize_path(path: pathlib.Path):
-    valid = f"-_.() {string.ascii_letters}{string.digits}"
-    name = "".join(c if c in valid else "_" for c in path.name)
-    return path.parent.resolve().joinpath(name)
-
-
 def powersave():
     prefs = utils.common.get_prefs()
 
@@ -51,8 +52,8 @@ def powersave():
     if path:
         name = f'{name.replace(".blend", "")}.blend'
         path = path.joinpath(name)
-        path = increment_until_unique(path)
         path = sanitize_path(path)
+        path = increment_until_unique(path)
 
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
