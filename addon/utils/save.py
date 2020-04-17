@@ -29,14 +29,14 @@ def increment_until_unique(path: pathlib.Path):
             path = path.with_name(name)
 
         else:
-            name = f"{stem}{utils.common.get_increment()}.blend"
+            name = f"{stem}{utils.common.increment()}.blend"
             path = path.with_name(name)
 
     return path
 
 
 def powersave():
-    prefs = utils.common.get_prefs()
+    prefs = utils.common.prefs()
 
     if bpy.data.is_saved:
         path = pathlib.Path(bpy.data.filepath).parent
@@ -46,7 +46,7 @@ def powersave():
     if prefs.powersave_name:
         name = prefs.powersave_name
     else:
-        name = utils.common.get_datetime_increment()
+        name = utils.common.date_time_increment()
 
     if path:
         name = f'{name.replace(".blend", "")}.blend'

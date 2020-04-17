@@ -3,8 +3,8 @@ from .. import utils
 
 
 @bpy.app.handlers.persistent
-def load_handler(dummy):
-    prefs = utils.common.get_prefs()
+def load_handler(_):
+    prefs = utils.common.prefs()
 
     utils.common.update_powersave_name()
 

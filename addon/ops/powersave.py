@@ -11,6 +11,7 @@ class PowerSave(bpy.types.Operator):
         "If this blend has never been saved, put it in the PowerSave folder",
     )
 
+
     def execute(self, context):
         result = utils.save.powersave()
         self.report(result[0], result[1])
