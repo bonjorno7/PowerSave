@@ -29,8 +29,9 @@ def sanitize(text: str):
 
 
 def get_datetime():
-    form = sanitize(get_prefs().datetime_format)
-    return datetime.datetime.now().strftime(form)
+    form = get_prefs().datetime_format
+    form = datetime.datetime.now().strftime(form)
+    return sanitize(form)
 
 
 def get_increment():
