@@ -17,7 +17,7 @@ bl_info = {
     "author": "bonjorno7",
     "description": "Autosave and such",
     "blender": (2, 80, 0),
-    "version": (0, 1, 6),
+    "version": (0, 1, 7),
     "location": "View3D",
     "warning": "",
     "category": "3D View"
