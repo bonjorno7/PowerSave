@@ -2,14 +2,16 @@ import bpy
 import datetime
 import re
 import pathlib
+from .. import props
 from ... import bl_info
 
 
-module_name = __name__.partition('.')[0]
+def get_module():
+    return props.addon.name
 
 
 def get_prefs():
-    return bpy.context.preferences.addons[module_name].preferences
+    return bpy.context.preferences.addons[get_module()].preferences
 
 
 def get_version():
