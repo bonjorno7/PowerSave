@@ -3,9 +3,9 @@ from .. import utils
 
 
 class OpenProjectFolder(bpy.types.Operator):
-    bl_idname = "powersave.open_project_folder"
-    bl_label = "Open Project Folder"
-    bl_description = "Open the folder containing this blend file in your operating system's file explorer"
+    bl_idname = 'powersave.open_project_folder'
+    bl_label = 'Open Project Folder'
+    bl_description = 'Open the folder containing this blend file in your operating system's file explorer'
 
 
     @classmethod

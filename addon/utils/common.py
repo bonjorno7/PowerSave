@@ -16,16 +16,16 @@ def prefs():
 
 
 def version():
-    return "".join(str(n) for n in bl_info["version"])
+    return ''.join(str(n) for n in bl_info['version'])
 
 
 def description(*args):
-    return ".\n".join(args)
+    return '.\n'.join(args)
 
 
 def sanitize(text: str):
-    valid = f"-_.()/\\ {string.ascii_letters}{string.digits}"
-    return "".join(c if c in valid else "_" for c in text)
+    valid = f'-_.()/\\ {string.ascii_letters}{string.digits}'
+    return ''.join(c if c in valid else '_' for c in text)
 
 
 def date_time():
@@ -36,12 +36,12 @@ def date_time():
 
 def increment():
     form = sanitize(prefs().increment_format)
-    numbers = re.findall(r"\d+", form)
-    return form if numbers else f"{form}1"
+    numbers = re.findall(r'\d+', form)
+    return form if numbers else f'{form}1'
 
 
 def date_time_increment():
-    return f"{date_time()}{increment()}"
+    return f'{date_time()}{increment()}'
 
 
 def update_powersave_name():

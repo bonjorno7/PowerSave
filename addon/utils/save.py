@@ -14,7 +14,7 @@ def sanitize_path(path: pathlib.Path):
 def increment_until_unique(path: pathlib.Path):
     while path.is_file():
         stem = path.stem
-        numbers = re.findall(r"\d+", stem)
+        numbers = re.findall(r'\d+', stem)
 
         if numbers:
             last = numbers[-1]
@@ -25,11 +25,11 @@ def increment_until_unique(path: pathlib.Path):
             start = index + max(length - len(number), 0)
             end = index + length
 
-            name = f"{stem[:start]}{number}{stem[end:]}.blend"
+            name = f'{stem[:start]}{number}{stem[end:]}.blend'
             path = path.with_name(name)
 
         else:
-            name = f"{stem}{utils.common.increment()}.blend"
+            name = f'{stem}{utils.common.increment()}.blend'
             path = path.with_name(name)
 
     return path
@@ -49,7 +49,7 @@ def powersave():
         name = utils.common.date_time_increment()
 
     if path:
-        name = f'{name.replace(".blend", "")}.blend'
+        name = f'{name.replace('.blend', '')}.blend'
         path = path.joinpath(name)
         path = sanitize_path(path)
         path = increment_until_unique(path)
@@ -60,8 +60,8 @@ def powersave():
             utils.files.add_to_recent_files()
 
         except:
-            return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
+            return ({'ERROR'}, f'Failed to save '{path.name}'', {'CANCELLED'})
 
-        return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
+        return ({'INFO'}, f'Saved '{path.name}'', {'FINISHED'})
 
-    return ({'WARNING'}, "No base folder set", {'CANCELLED'})
+    return ({'WARNING'}, 'No base folder set', {'CANCELLED'})

@@ -13,14 +13,14 @@
 
 
 bl_info = {
-    "name": "PowerSave",
-    "author": "bonjorno7",
-    "description": "Autosave and such",
-    "blender": (2, 80, 0),
-    "version": (0, 1, 8),
-    "location": "View3D",
-    "warning": "",
-    "category": "3D View"
+    'name': 'PowerSave',
+    'author': 'bonjorno7',
+    'description': 'Autosave and such',
+    'blender': (2, 80, 0),
+    'version': (0, 1, 8),
+    'location': 'View3D',
+    'warning': '',
+    'category': '3D View'
 }
 
 

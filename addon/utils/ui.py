@@ -5,11 +5,11 @@ from .. import icons
 def get_icon():
     if bpy.data.is_saved:
         if bpy.data.is_dirty:
-            icon = "gray"
+            icon = 'gray'
         else:
-            icon = "green"
+            icon = 'green'
     else:
-        icon = "red"
+        icon = 'red'
 
     return icons.id(icon)
 
@@ -24,7 +24,7 @@ def tag_redraw():
 def draw_prop(layout, text, data, prop):
     row = layout.row()
     row.label(text=text)
-    row.prop(data, prop, text="")
+    row.prop(data, prop, text='')
 
 
 def draw_bool(layout, text, data, prop):
@@ -32,7 +32,7 @@ def draw_bool(layout, text, data, prop):
     row.label(text=text)
     col = row.column()
     col.alignment = 'RIGHT'
-    col.prop(data, prop, text="")
+    col.prop(data, prop, text='')
 
 
 def draw_op(layout, text, operator, options):
