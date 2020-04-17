@@ -1,5 +1,5 @@
+from . import props
 from . import icons
-from . import prefs
 from . import ops
 from . import timers
 from . import handlers
@@ -7,8 +7,8 @@ from . import ui
 
 
 def register():
+    props.register()
     icons.register()
-    prefs.register()
     ops.register()
     timers.register()
     handlers.register()
@@ -20,5 +20,5 @@ def unregister():
     handlers.unregister()
     timers.unregister()
     ops.unregister()
-    prefs.unregister()
     icons.unregister()
+    props.unregister()
