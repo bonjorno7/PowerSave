@@ -34,7 +34,7 @@ def open_project_folder():
         return ({'WARNING'}, "Unsaved file", {'CANCELLED'})
 
     try:
-        bpy.ops.wm.url_open(url=str(pathlib.Path(bpy.data.filepath).parent))
+        bpy.ops.wm.url_open(url=f"file://{pathlib.Path(bpy.data.filepath).parent}")
     except:
         return ({'ERROR'}, "Failed to open project folder", {'CANCELLED'})
 
