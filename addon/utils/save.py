@@ -20,11 +20,11 @@ def increment_until_unique(path: pathlib.Path):
             end = index + length
 
             name = f"{stem[:start]}{number}{stem[end:]}.blend"
-            path = path.parent.joinpath(name)
+            path = path.with_name(name)
 
         else:
             name = f"{stem}{utils.common.get_increment()}.blend"
-            path = path.parent.joinpath(name)
+            path = path.with_name(name)
 
     return path
 
