@@ -5,11 +5,10 @@ from .. import utils
 
 
 def sanitize_path(path: pathlib.Path):
-    path = path.resolve()
-    anchor = pathlib.Path(path.anchor)
-    path = str(path)[len(path.anchor):]
+    drive = pathlib.Path(path.drive)
+    path = str(path)[len(path.drive):]
     path = utils.common.sanitize(path)
-    return anchor.joinpath(path)
+    return drive.joinpath(path).resolve()
 
 
 def increment_until_unique(path: pathlib.Path):
