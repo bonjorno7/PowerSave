@@ -5,8 +5,7 @@ import subprocess
 
 
 def get_default_folder():
-    temporary_directory = bpy.context.preferences.filepaths.temporary_directory
-    return str(pathlib.Path(temporary_directory).joinpath("PowerSave"))
+    return str(pathlib.Path.home().joinpath("PowerSave"))
 
 
 def add_to_recent_files():
