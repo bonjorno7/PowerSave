@@ -1,4 +1,5 @@
 import bpy
+import string
 import datetime
 import re
 import pathlib
@@ -22,13 +23,18 @@ def description(*args):
     return ".\n".join(args)
 
 
+def sanitize(text: str):
+    valid = f"-_.()/\\ {string.ascii_letters}{string.digits}"
+    return "".join(c if c in valid else "_" for c in text)
+
+
 def get_datetime():
-    form = get_prefs().datetime_format
+    form = sanitize(get_prefs().datetime_format)
     return datetime.datetime.now().strftime(form)
 
 
 def get_increment():
-    form = get_prefs().increment_format
+    form = sanitize(get_prefs().increment_format)
     numbers = re.findall(r"\d+", form)
     return form if numbers else f"{form}1"
 
