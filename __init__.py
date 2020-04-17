@@ -18,9 +18,9 @@ bl_info = {
     "description": "Autosave and such",
     "blender": (2, 80, 0),
     "version": (0, 1, 5),
-    "location": "",
+    "location": "View3D",
     "warning": "",
-    "category": "System"
+    "category": "3D View"
 }
 
 
