@@ -14,12 +14,12 @@
 
 bl_info = {
     'name': 'PowerSave',
-    'author': 'bonjorno7',
-    'description': 'Autosave and such',
+    'author': 'bonjorno7, TeamC',
+    'description': 'A powerful saving tool',
     'blender': (2, 80, 0),
     'version': (0, 1, 9),
     'location': 'View3D',
-    'warning': '',
+    'wiki_url': 'https://github.com/bonjorno7/PowerSave',
     'category': '3D View'
 }
 
