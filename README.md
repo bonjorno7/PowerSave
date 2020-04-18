@@ -1,2 +1,2 @@
 # PowerSave
- Blender add-on that helps with autosave and such
+A powerful saving tool
