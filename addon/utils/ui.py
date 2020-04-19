@@ -1,15 +1,26 @@
 import bpy
+from .. import utils
 from .. import icons
 
 
 def get_icon():
-    if bpy.data.is_saved:
-        if bpy.data.is_dirty:
-            icon = 'gray'
+    if utils.common.prefs().high_contrast_icons:
+        if bpy.data.is_saved:
+            if bpy.data.is_dirty:
+                icon = 'mixed'
+            else:
+                icon = 'white'
         else:
-            icon = 'green'
+            icon = 'black'
+
     else:
-        icon = 'red'
+        if bpy.data.is_saved:
+            if bpy.data.is_dirty:
+                icon = 'gray'
+            else:
+                icon = 'green'
+        else:
+            icon = 'red'
 
     return icons.id(icon)
 
