@@ -47,6 +47,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='_01',
     )
 
+    high_contrast_icons: bpy.props.BoolProperty(
+        name='High Contrast Icons',
+        description='Whether to use the high contrast set of icons',
+        default=False,
+    )
+
     powersave_name: bpy.props.StringProperty(
         name='PowerSave Name',
         description='The name to use for PowerSave',
@@ -63,6 +69,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
+        utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
 
         url = 'https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes'
         utils.ui.draw_op(layout, 'Date Time Documentation', 'wm.url_open', {'url': url})
