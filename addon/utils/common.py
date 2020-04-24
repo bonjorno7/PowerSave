@@ -5,7 +5,6 @@ import re
 import pathlib
 from .. import props
 from .. import ui
-from ... import bl_info
 
 
 def module():
@@ -14,10 +13,6 @@ def module():
 
 def prefs():
     return bpy.context.preferences.addons[module()].preferences
-
-
-def version():
-    return ''.join(str(n) for n in bl_info['version'])
 
 
 def description(*args):
