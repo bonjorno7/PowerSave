@@ -46,6 +46,8 @@ def update_powersave_name():
 
 
 def update_panel_category(self, context):
-    ui.main_panel.PowerSavePanel.bl_category = prefs().panel_category
+    category = prefs().panel_category
+    ui.main_panel.PowerSavePanel.bl_category = category
+    ui.main_panel.PowerSavePanel.bl_region_type = 'UI' if category else 'HEADER'
     bpy.utils.unregister_class(ui.main_panel.PowerSavePanel)
     bpy.utils.register_class(ui.main_panel.PowerSavePanel)
