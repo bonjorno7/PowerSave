@@ -4,6 +4,7 @@ import datetime
 import re
 import pathlib
 from .. import props
+from .. import ui
 from ... import bl_info
 
 
@@ -47,3 +48,9 @@ def date_time_increment():
 def update_powersave_name():
     name = pathlib.Path(bpy.data.filepath).stem
     prefs().powersave_name = name
+
+
+def update_panel_category(self, context):
+    ui.main_panel.PowerSavePanel.bl_category = prefs().panel_category
+    bpy.utils.unregister_class(ui.main_panel.PowerSavePanel)
+    bpy.utils.register_class(ui.main_panel.PowerSavePanel)

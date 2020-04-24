@@ -59,6 +59,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='',
     )
 
+    panel_category: bpy.props.StringProperty(
+        name='Panel Category',
+        description='What category to show the PowerSave panel in, leave empty to hide it entirely',
+        default='PowerSave',
+        update=utils.common.update_panel_category,
+    )
 
     def draw(self, context):
         layout = self.layout
@@ -70,6 +76,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
         utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
+        utils.ui.draw_prop(layout, 'Panel Category', self, 'panel_category')
 
         url = 'https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes'
         utils.ui.draw_op(layout, 'Date Time Documentation', 'wm.url_open', {'url': url})
