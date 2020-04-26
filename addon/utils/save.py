@@ -56,7 +56,7 @@ def powersave():
 
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
-            bpy.ops.wm.save_mainfile(filepath=str(path))
+            bpy.ops.wm.save_as_mainfile(filepath=str(path))
             utils.files.add_to_recent_files()
 
         except:
