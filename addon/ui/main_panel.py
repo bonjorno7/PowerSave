@@ -21,7 +21,16 @@ class PowerSavePanel(bpy.types.Panel):
         col = layout.column()
 
         box = col.box().column()
-        box.operator('powersave.powersave')
+
+        wm = bpy.context.window_manager
+
+        if hops:
+            try:
+                box.operator('hops.powersave', text='PowerSave(hops)')
+            except:
+                box.operator('powersave.powersave')
+        else:
+            box.operator('powersave.powersave')
         box.prop(prefs, 'powersave_name', text='')
 
         col.separator()
@@ -42,3 +51,11 @@ def popover(self, context):
     panel = PowerSavePanel.bl_idname
     icon = utils.ui.get_icon()
     layout.popover(panel, text='', icon_value=icon)
+
+def hops():
+    wm = bpy.context.window_manager
+
+    if hasattr(wm, 'Hard_Ops_folder_name'):
+        return bpy.context.preferences.addons[wm.Hard_Ops_folder_name].preferences
+
+    return False
