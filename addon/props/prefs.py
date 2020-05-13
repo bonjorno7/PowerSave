@@ -26,6 +26,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         max=60,
     )
 
+    autosave_to_copy: bpy.props.BoolProperty(
+        name='Autosave to Copy',
+        description='Whether to autosave to a separate _autosave file',
+        default=False,
+    )
+
     save_on_startup: bpy.props.BoolProperty(
         name='Save on Startup',
         description='Whether to save new projects in your base folder automatically',
@@ -72,6 +78,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
         utils.ui.draw_prop(layout, 'Use Autosave', self, 'use_autosave')
         utils.ui.draw_prop(layout, 'Autosave Interval', self, 'autosave_interval')
+        utils.ui.draw_prop(layout, 'Autosave to Copy', self, 'autosave_to_copy')
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
