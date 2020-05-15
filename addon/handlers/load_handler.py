@@ -8,6 +8,6 @@ def load_handler(_):
 
     utils.common.update_powersave_name()
 
-    if prefs.save_on_startup:
+    if prefs.save_on_startup and not bpy.data.is_saved:
         result = utils.save.powersave()
         print(result[1])
