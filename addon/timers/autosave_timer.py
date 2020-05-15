@@ -7,10 +7,10 @@ def autosave_timer():
     prefs = utils.common.prefs()
 
     if prefs.use_autosave and bpy.data.is_saved and bpy.data.is_dirty:
-        path = pathlib.Path(bpy.data.filepath)
+        path = utils.files.as_path(bpy.data.filepath)
 
         if prefs.autosave_to_copy:
-            path = path.with_suffix('.autosave')
+            path = utils.files.with_autosave(path)
 
         bpy.ops.wm.save_as_mainfile(filepath=str(path), check_existing=False, copy=True)
 
