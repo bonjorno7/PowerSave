@@ -1,5 +1,4 @@
 import bpy
-import string
 import datetime
 import re
 import pathlib
@@ -20,8 +19,7 @@ def description(*args):
 
 
 def sanitize(text: str):
-    valid = f'-_.()/\\ {string.ascii_letters}{string.digits}'
-    return ''.join(c if c in valid else '_' for c in text)
+    return ''.join('_' if c in ':*?"<>|' else c for c in text)
 
 
 def date_time():
