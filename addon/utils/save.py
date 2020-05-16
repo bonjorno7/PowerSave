@@ -60,8 +60,8 @@ def powersave():
             utils.files.add_to_recent_files()
 
         except:
-            return ({'ERROR'}, f'Failed to save "{path.name}"', {'CANCELLED'})
+            return ({'ERROR'}, f'Failed to PowerSave "{path.name}"', {'CANCELLED'})
 
-        return ({'INFO'}, f'Saved "{path.name}"', {'FINISHED'})
+        return ({'INFO'}, f'PowerSaved "{path.name}"', {'FINISHED'})
 
-    return ({'WARNING'}, 'No base folder set', {'CANCELLED'})
+    return ({'WARNING'}, 'No PowerSave folder set', {'CANCELLED'})
