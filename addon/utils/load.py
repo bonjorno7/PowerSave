@@ -35,3 +35,23 @@ def load_autosave():
         return ({'ERROR'}, f'Failed to save "{new_path.name}"', {'CANCELLED'})
 
     return ({'INFO'}, f'Loaded "{autosave_path.name}" as "{new_path.name}"', {'FINISHED'})
+
+
+def verify_version(direction):
+    path = utils.files.as_path(bpy.data.filepath)
+    path = utils.files.change_version(path, direction)
+    return path if path.is_file() else False
+
+
+def load_version(direction):
+    path = verify_version(direction)
+
+    if not path:
+        return ({'ERROR'}, f'File "{path.name}" does not exist', {'CANCELLED'})
+
+    try:
+        bpy.ops.wm.open_mainfile(filepath=str(path))
+    except:
+        return ({'ERROR'}, f'Failed to load "{path.name}"', {'CANCELLED'})
+
+    return ({'INFO'}, f'Loaded "{path.name}"', {'FINISHED'})
