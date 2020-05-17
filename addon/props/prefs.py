@@ -77,14 +77,14 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout = self.layout
 
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
-        utils.ui.draw_prop(layout, 'Use Autosave', self, 'use_autosave')
         utils.ui.draw_prop(layout, 'Autosave Interval', self, 'autosave_interval')
+        utils.ui.draw_prop(layout, 'Use Autosave', self, 'use_autosave')
         utils.ui.draw_prop(layout, 'Autosave to Copy', self, 'autosave_to_copy')
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
-        utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
         utils.ui.draw_prop(layout, 'Panel Category', self, 'panel_category')
+        utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
 
         url = 'https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes'
         utils.ui.draw_op(layout, 'Date Time Documentation', 'wm.url_open', {'url': url})
