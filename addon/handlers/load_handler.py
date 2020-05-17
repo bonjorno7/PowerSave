@@ -11,5 +11,5 @@ def load_handler(_):
         bpy.ops.powersave.powersave()
 
     if prefs.autosave_to_copy and bpy.data.is_saved:
-        if utils.save.should_load_autosave():
+        if utils.load.should_load_autosave():
             bpy.ops.powersave.load_autosave('INVOKE_DEFAULT')
