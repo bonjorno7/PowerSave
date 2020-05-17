@@ -38,3 +38,12 @@ def open_project_folder():
         return ({'ERROR'}, 'Failed to open project folder', {'CANCELLED'})
 
     return ({'INFO'}, 'Opened project folder', {'FINISHED'})
+
+
+def as_path(path: str):
+    return pathlib.Path(path).resolve()
+
+
+def with_autosave(path: pathlib.Path):
+    stem = f'{path.stem}_autosave'
+    return path.with_name(f'{stem}{path.suffix}')
