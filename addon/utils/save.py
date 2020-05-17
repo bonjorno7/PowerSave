@@ -25,6 +25,9 @@ def powersave():
     else:
         path = pathlib.Path(prefs.base_folder)
 
+    if bpy.data.is_saved and not prefs.powersave_name:
+        utils.common.update_powersave_name()
+
     if prefs.powersave_name:
         name = prefs.powersave_name
     else:
