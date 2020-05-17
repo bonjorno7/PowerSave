@@ -2,6 +2,8 @@ import bpy
 import pathlib
 import sys
 import subprocess
+import re
+from .. import utils
 
 
 def get_default_folder():
@@ -47,3 +49,26 @@ def as_path(path: str):
 def with_autosave(path: pathlib.Path):
     stem = f'{path.stem}_autosave'
     return path.with_name(f'{stem}{path.suffix}')
+
+
+def change_version(path: pathlib.Path, direction: int):
+    stem = path.stem
+    numbers = re.findall(r'\d+', stem)
+
+    if numbers:
+        last = numbers[-1]
+        length = len(last)
+        number = str(int(last) + direction)
+
+        index = stem.rfind(last)
+        start = index + max(length - len(number), 0)
+        end = index + length
+
+        name = f'{stem[:start]}{number}{stem[end:]}.blend'
+        path = path.with_name(name)
+
+    else:
+        name = f'{stem}{utils.common.increment()}.blend'
+        path = path.with_name(name)
+
+    return path
