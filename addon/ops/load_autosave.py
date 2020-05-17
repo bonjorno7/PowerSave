@@ -14,7 +14,7 @@ class LoadAutosave(bpy.types.Operator):
 
 
     def execute(self, context):
-        result = utils.save.load_autosave()
+        result = utils.load.load_autosave()
         self.report(result[0], result[1])
         return result[2]
 
