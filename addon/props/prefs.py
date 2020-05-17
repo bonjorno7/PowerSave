@@ -10,6 +10,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         description='The directory where initial saves will be stored',
         default=utils.files.get_default_folder(),
         subtype='FILE_PATH',
+        update=utils.common.update_base_folder,
     )
 
     use_autosave: bpy.props.BoolProperty(
