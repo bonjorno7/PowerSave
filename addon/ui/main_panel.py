@@ -35,6 +35,9 @@ class PowerSavePanel(bpy.types.Panel):
         col.separator()
 
         box = col.box().column()
+        flow = box.grid_flow(align=True)
+        flow.operator('powersave.load_previous', text='', icon='REW')
+        flow.operator('powersave.load_next', text='', icon='FF')
         box.operator('powersave.open_project_folder')
 
         col.separator()
