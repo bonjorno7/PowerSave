@@ -1,6 +1,5 @@
 import bpy
 import pathlib
-import re
 from .. import utils
 
 
@@ -13,24 +12,7 @@ def sanitize_path(path: pathlib.Path):
 
 def increment_until_unique(path: pathlib.Path):
     while path.is_file():
-        stem = path.stem
-        numbers = re.findall(r'\d+', stem)
-
-        if numbers:
-            last = numbers[-1]
-            length = len(last)
-            number = str(int(last) + 1)
-
-            index = stem.rfind(last)
-            start = index + max(length - len(number), 0)
-            end = index + length
-
-            name = f'{stem[:start]}{number}{stem[end:]}.blend'
-            path = path.with_name(name)
-
-        else:
-            name = f'{stem}{utils.common.increment()}.blend'
-            path = path.with_name(name)
+        path = utils.files.change_version(path, 1)
 
     return path
 
