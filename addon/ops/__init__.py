@@ -4,6 +4,7 @@ from . import load_autosave
 from . import load_previous
 from . import load_next
 from . import open_project_folder
+from . import browse_base_folder
 
 
 def register():
@@ -12,9 +13,11 @@ def register():
     bpy.utils.register_class(load_previous.LoadPrevious)
     bpy.utils.register_class(load_next.LoadNext)
     bpy.utils.register_class(open_project_folder.OpenProjectFolder)
+    bpy.utils.register_class(browse_base_folder.BrowseBaseFolder)
 
 
 def unregister():
+    bpy.utils.unregister_class(browse_base_folder.BrowseBaseFolder)
     bpy.utils.unregister_class(open_project_folder.OpenProjectFolder)
     bpy.utils.unregister_class(load_next.LoadNext)
     bpy.utils.unregister_class(load_previous.LoadPrevious)
