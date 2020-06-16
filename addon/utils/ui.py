@@ -38,6 +38,16 @@ def draw_prop(layout, text, data, prop):
     row.prop(data, prop, text='')
 
 
+def draw_file(layout, text, data, prop):
+    split = layout.split()
+    row = split.row()
+    row.label(text=text)
+
+    row = split.row(align=True)
+    row.prop(data, prop, text='')
+    row.operator('powersave.browse_base_folder', text='', icon='FILEBROWSER')
+
+
 def draw_bool(layout, text, data, prop):
     row = layout.row()
     row.label(text=text)
