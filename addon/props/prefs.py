@@ -9,8 +9,6 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         name='Base Folder',
         description='The directory where initial saves will be stored',
         default=utils.files.get_default_folder(),
-        subtype='FILE_PATH',
-        update=utils.common.update_base_folder,
     )
 
     use_autosave: bpy.props.BoolProperty(
@@ -76,7 +74,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
 
-        utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
+        utils.ui.draw_file(layout, 'Base Folder', self, 'base_folder')
         utils.ui.draw_prop(layout, 'Autosave Interval', self, 'autosave_interval')
         utils.ui.draw_prop(layout, 'Use Autosave', self, 'use_autosave')
         utils.ui.draw_prop(layout, 'Autosave to Copy', self, 'autosave_to_copy')

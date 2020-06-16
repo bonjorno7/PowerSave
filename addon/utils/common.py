@@ -39,16 +39,6 @@ def date_time_increment():
     return f'{date_time()}{increment()}'
 
 
-def update_base_folder(self, context):
-    folder = utils.files.as_path(self['base_folder'])
-    parent = folder.parent
-
-    if folder.name == parent.name:
-        folder = parent
-
-    self['base_folder'] = str(folder)
-
-
 def update_powersave_name():
     name = pathlib.Path(bpy.data.filepath).stem
     prefs().powersave_name = name
