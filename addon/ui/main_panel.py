@@ -17,8 +17,16 @@ class PowerSavePanel(bpy.types.Panel):
         column = layout.column()
 
         if self.is_popover:
-            box = column.box().row()
-            box.prop(prefs, 'panel_tab', expand=True)
+            if prefs.panel_tab == 'POWERSAVE':
+                text = 'PowerSave'
+            elif prefs.panel_tab == 'POWERLINK':
+                text = 'PowerLink'
+
+            row = column.row()
+            box = row.box().row()
+            box.label(text=text)
+            box = row.box().row()
+            box.prop(prefs, 'panel_tab', expand=True, icon_only=True)
             column.separator()
 
         if prefs.panel_tab == 'POWERSAVE' or not self.is_popover:
