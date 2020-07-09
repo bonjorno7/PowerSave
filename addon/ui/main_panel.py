@@ -27,10 +27,8 @@ class PowerSavePanel(bpy.types.Panel):
                 text = 'Unknown'
 
             row = column.row()
-            box = row.box().row()
-            box.label(text=text)
-            box = row.box().row()
-            box.prop(prefs, 'panel_tab', expand=True, icon_only=True)
+            row.label(text=text)
+            row.prop(prefs, 'panel_tab', expand=True, icon_only=True)
             column.separator()
 
         if prefs.panel_tab == 'POWERSAVE' or not self.is_popover:
