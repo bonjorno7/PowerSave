@@ -64,6 +64,11 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='',
     )
 
+    panel_tab: bpy.props.EnumProperty(items=[
+        ('POWERSAVE', 'PowerSave', ''),
+        ('POWERLINK', 'PowerLink', ''),
+    ])
+
     panel_category: bpy.props.StringProperty(
         name='Panel Category',
         description='What category to show the PowerSave panel in, leave empty to hide it entirely',
