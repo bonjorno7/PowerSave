@@ -5,7 +5,7 @@ from .. import utils
 class PowerSavePanel(bpy.types.Panel):
     bl_idname = 'POWERSAVE_PT_PowerSavePanel'
     bl_category = 'PowerSave'
-    bl_label = f'PowerSave'
+    bl_label = 'PowerSave'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
 
@@ -23,6 +23,8 @@ class PowerSavePanel(bpy.types.Panel):
                 text = 'PowerSave'
             elif prefs.panel_tab == 'POWERLINK':
                 text = 'PowerLink'
+            else:
+                text = 'Unknown'
 
             row = column.row()
             box = row.box().row()
