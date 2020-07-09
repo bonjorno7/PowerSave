@@ -14,41 +14,22 @@ class PowerSavePanel(bpy.types.Panel):
         prefs = utils.common.prefs()
 
         layout = self.layout
+        column = layout.column()
 
         if self.is_popover:
-            layout.ui_units_x = 8
+            box = column.box().row()
+            box.prop(prefs, 'panel_tab', expand=True)
+            column.separator()
 
-        col = layout.column()
+        if prefs.panel_tab == 'POWERSAVE' or not self.is_popover:
+            powersave_draw(self, column)
+            if self.is_popover:
+                layout.ui_units_x = 8
 
-        box = col.box().column()
-
-        if hops():
-            try:
-                box.operator('hops.powersave', text='PowerSave (hops)')
-            except:
-                box.operator('powersave.powersave')
-        else:
-            box.operator('powersave.powersave')
-
-        box.prop(prefs, 'powersave_name', text='')
-
-        col.separator()
-
-        box = col.box().column()
-        flow = box.grid_flow(align=True)
-        flow.operator('powersave.load_previous', text='', icon='REW')
-        flow.operator('powersave.load_next', text='', icon='FF')
-        box.operator('powersave.open_project_folder')
-
-        col.separator()
-
-        box = col.box().column()
-        row = box.row()
-        row.enabled = prefs.use_autosave
-        row.prop(prefs, 'autosave_interval')
-        box.prop(prefs, 'use_autosave')
-        box.prop(prefs, 'autosave_to_copy')
-        box.prop(prefs, 'save_on_startup')
+        elif prefs.panel_tab == 'POWERLINK':
+            powerlink_draw(self, column)
+            if self.is_popover:
+                layout.ui_units_x = 12
 
 
 def popover(self, context):
@@ -58,10 +39,55 @@ def popover(self, context):
     layout.popover(panel, text='', icon_value=icon)
 
 
-def hops():
-    wm = bpy.context.window_manager
+def powersave_draw(self, column):
+    prefs = utils.common.prefs()
 
+    box = column.box().column()
+    if hops_prefs():
+        try:
+            box.operator('hops.powersave', text='PowerSave (hops)')
+        except:
+            box.operator('powersave.powersave')
+    else:
+        box.operator('powersave.powersave')
+    box.prop(prefs, 'powersave_name', text='')
+
+    column.separator()
+
+    box = column.box().column()
+    flow = box.grid_flow(align=True)
+    flow.operator('powersave.load_previous', text='', icon='REW')
+    flow.operator('powersave.load_next', text='', icon='FF')
+    box.operator('powersave.open_project_folder')
+
+    column.separator()
+
+    box = column.box().column()
+    row = box.row()
+    row.enabled = prefs.use_autosave
+    row.prop(prefs, 'autosave_interval')
+    box.prop(prefs, 'use_autosave')
+    box.prop(prefs, 'autosave_to_copy')
+    box.prop(prefs, 'save_on_startup')
+
+
+def powerlink_draw(self, column):
+    wm = bpy.context.window_manager
+    if hasattr(wm, 'powerlink'):
+        wm.powerlink.draw(self, column)
+
+    else:
+        column.separator()
+        box = column.box().column()
+
+        url = 'https://gumroad.com/l/powerlink'
+        utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
+
+        url = 'https://blendermarket.com/products/powerlink'
+        utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
+
+
+def hops_prefs():
+    wm = bpy.context.window_manager
     if hasattr(wm, 'Hard_Ops_folder_name'):
         return bpy.context.preferences.addons[wm.Hard_Ops_folder_name].preferences
-
-    return False
