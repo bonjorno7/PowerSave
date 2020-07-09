@@ -1,5 +1,12 @@
 import bpy
+from .. import icons
 from .. import utils
+
+
+def panel_tab_items(self, context):
+    powersave = ('POWERSAVE', 'PowerSave', '', icons.id('powersave'), 1)
+    powerlink = ('POWERLINK', 'PowerLink', '', icons.id('powerlink'), 2)
+    return [powersave, powerlink]
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
@@ -64,10 +71,11 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='',
     )
 
-    panel_tab: bpy.props.EnumProperty(items=[
-        ('POWERSAVE', 'PowerSave', ''),
-        ('POWERLINK', 'PowerLink', ''),
-    ])
+    panel_tab: bpy.props.EnumProperty(
+        name='Panel Tab',
+        description='Which tab is currently active in the popover',
+        items=panel_tab_items,
+    )
 
     panel_category: bpy.props.StringProperty(
         name='Panel Category',
