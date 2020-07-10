@@ -76,6 +76,12 @@ def powersave_draw(self, column):
     box.prop(prefs, 'autosave_to_copy')
     box.prop(prefs, 'save_on_startup')
 
+    column.separator()
+
+    box = column.box().column()
+    icon = 'CHECKBOX_HLT' if bpy.data.use_autopack else 'CHECKBOX_DEHLT'
+    box.operator('file.autopack_toggle', text='Toggle Autopack', icon=icon)
+
 
 def powerlink_draw(self, column):
     wm = bpy.context.window_manager
