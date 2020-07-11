@@ -12,5 +12,6 @@ class PowerSaveProps(bpy.types.PropertyGroup):
         default=name,
     )
 
+    @property
     def prefs(self):
         return utils.common.prefs()
