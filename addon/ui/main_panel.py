@@ -92,6 +92,7 @@ def powerlink_draw(self, column):
     else:
         column.separator()
         box = column.box().column()
+        box.label(text='Check out PowerLink!')
 
         url = 'https://gumroad.com/l/powerlink'
         utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
