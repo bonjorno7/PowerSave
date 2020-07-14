@@ -5,8 +5,8 @@ from .. import utils
 class LoadPrevious(bpy.types.Operator):
     bl_idname = 'powersave.load_previous'
     bl_label = 'Load Previous'
-    bl_description = 'Load the previous iteration of this file'
     bl_options = {'INTERNAL'}
+    bl_description = 'Load the previous iteration of this file'
 
 
     @classmethod

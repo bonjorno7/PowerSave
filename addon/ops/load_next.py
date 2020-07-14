@@ -5,8 +5,8 @@ from .. import utils
 class LoadNext(bpy.types.Operator):
     bl_idname = 'powersave.load_next'
     bl_label = 'Load Next'
-    bl_description = 'Load the next iteration of this file'
     bl_options = {'INTERNAL'}
+    bl_description = 'Load the next iteration of this file'
 
 
     @classmethod

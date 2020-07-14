@@ -1,5 +1,12 @@
 import bpy
+from .. import icons
 from .. import utils
+
+
+def panel_tab_items(self, context):
+    powersave = ('POWERSAVE', 'PowerSave', '', icons.id('powersave'), 0)
+    powerlink = ('POWERLINK', 'PowerLink', '', icons.id('powerlink'), 1)
+    return [powersave, powerlink]
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
@@ -64,6 +71,20 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='',
     )
 
+    panel_tab: bpy.props.EnumProperty(
+        name='Panel Tab',
+        description='Which tab is currently active in the popover',
+        items=panel_tab_items,
+    )
+
+    popover_width: bpy.props.FloatProperty(
+        name='Popover Width',
+        description='How wide the popover panel should be, in blender UI units',
+        default=10,
+        min=1,
+        max=20,
+    )
+
     panel_category: bpy.props.StringProperty(
         name='Panel Category',
         description='What category to show the PowerSave panel in, leave empty to hide it entirely',
@@ -81,8 +102,9 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
-        utils.ui.draw_prop(layout, 'Panel Category', self, 'panel_category')
         utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
+        utils.ui.draw_prop(layout, 'Popover Width', self, 'popover_width')
+        utils.ui.draw_prop(layout, 'Panel Category', self, 'panel_category')
 
         url = 'https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes'
         utils.ui.draw_op(layout, 'Date Time Documentation', 'wm.url_open', {'url': url})

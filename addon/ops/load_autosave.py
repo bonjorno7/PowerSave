@@ -5,8 +5,8 @@ from .. import utils
 class LoadAutosave(bpy.types.Operator):
     bl_idname = 'powersave.load_autosave'
     bl_label = 'Load Autosave'
-    bl_description = 'Load the autosave file for this blend'
     bl_options = {'INTERNAL'}
+    bl_description = 'Load the autosave file for this blend'
 
 
     def draw(self, context):
