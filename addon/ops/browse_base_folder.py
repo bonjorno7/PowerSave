@@ -25,7 +25,7 @@ class BrowseBaseFolder(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
         prefs = utils.common.prefs()
         folder = utils.files.as_path(self.filepath)
 
-        while folder.name == folder.parent.name:
+        while folder.name.lower() == folder.parent.name.lower():
             folder = folder.parent
 
         prefs.base_folder = str(folder)
