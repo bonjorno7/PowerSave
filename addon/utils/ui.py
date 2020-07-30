@@ -3,24 +3,23 @@ from .. import utils
 from .. import icons
 
 
-def get_icon():
-    if utils.common.prefs().high_contrast_icons:
-        if bpy.data.is_saved:
-            if bpy.data.is_dirty:
-                icon = 'mixed'
-            else:
-                icon = 'white'
-        else:
-            icon = 'black'
+icon_presets = {
+    'DEFAULT': {'saved': 'green', 'dirty': 'gray', 'unsaved': 'red'},
+    'TRAFFIC': {'saved': 'green', 'dirty': 'yellow', 'unsaved': 'red'},
+    'CONTRAST': {'saved': 'white', 'dirty': 'mixed', 'unsaved': 'black'},
+}
 
-    else:
-        if bpy.data.is_saved:
-            if bpy.data.is_dirty:
-                icon = 'gray'
-            else:
-                icon = 'green'
+
+def get_icon():
+    icon_dict = icon_presets[utils.common.prefs().icon_preset]
+
+    if bpy.data.is_saved:
+        if bpy.data.is_dirty:
+            icon = icon_dict['dirty']
         else:
-            icon = 'red'
+            icon = icon_dict['saved']
+    else:
+        icon = icon_dict['unsaved']
 
     return icons.id(icon)
 
