@@ -59,10 +59,14 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         default='_01',
     )
 
-    high_contrast_icons: bpy.props.BoolProperty(
-        name='High Contrast Icons',
-        description='Whether to use the high contrast set of icons',
-        default=False,
+    icon_preset: bpy.props.EnumProperty(
+        name='Icon Preset',
+        description='Which set of icons to use for the 3D view button',
+        items=[
+            ('DEFAULT', 'Default', 'Green - Gray - Red'),
+            ('TRAFFIC', 'Traffic Light', 'Green - Yellow - Red'),
+            ('CONTRAST', 'High Contrast', 'White - Mixed - Black'),
+        ],
     )
 
     powersave_name: bpy.props.StringProperty(
@@ -102,7 +106,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
-        utils.ui.draw_prop(layout, 'High Contrast Icons', self, 'high_contrast_icons')
+        utils.ui.draw_prop(layout, 'Icon Preset', self, 'icon_preset')
         utils.ui.draw_prop(layout, 'Popover Width', self, 'popover_width')
         utils.ui.draw_prop(layout, 'Panel Category', self, 'panel_category')
 
