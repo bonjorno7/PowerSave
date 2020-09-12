@@ -22,7 +22,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
     use_autosave: bpy.props.BoolProperty(
         name='Use Autosave',
         description='Whether to periodically save the file',
-        default=True,
+        default=False,
     )
 
     autosave_interval: bpy.props.IntProperty(
