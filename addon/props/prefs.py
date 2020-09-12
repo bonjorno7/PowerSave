@@ -74,12 +74,14 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         name='PowerSave Name',
         description='The name to use for PowerSave',
         default='',
+        options={'SKIP_SAVE'},
     )
 
     panel_tab: bpy.props.EnumProperty(
         name='Panel Tab',
         description='Which tab is currently active in the popover',
         items=panel_tab_items,
+        options={'SKIP_SAVE'},
     )
 
     popover_width: bpy.props.FloatProperty(
