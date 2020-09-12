@@ -47,6 +47,7 @@ def popover(self, context):
 
 def powersave_draw(self, column):
     prefs = utils.common.prefs()
+    filepaths = bpy.context.preferences.filepaths
 
     box = column.box().column()
     if hops_prefs():
@@ -82,6 +83,14 @@ def powersave_draw(self, column):
     icon = 'CHECKBOX_HLT' if bpy.data.use_autopack else 'CHECKBOX_DEHLT'
     box.operator('file.autopack_toggle', text='Toggle Autopack', icon=icon)
     box.operator('powersave.purge_orphans', text='Purge Orphans')
+
+    column.separator()
+    box = column.box().column()
+    box.prop(filepaths, 'use_auto_save_temporary_files')
+    col = box.column()
+    col.enabled = filepaths.use_auto_save_temporary_files
+    col.prop(filepaths, 'auto_save_time')
+    box.prop(filepaths, 'save_version')
 
 
 def powerlink_draw(self, column):
