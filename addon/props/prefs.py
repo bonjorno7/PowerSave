@@ -103,9 +103,16 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout = self.layout
 
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
-        utils.ui.draw_prop(layout, 'Autosave Interval', self, 'autosave_interval')
-        utils.ui.draw_prop(layout, 'Use Autosave', self, 'use_autosave')
-        utils.ui.draw_prop(layout, 'Autosave to Copy', self, 'autosave_to_copy')
+        utils.ui.draw_bool(layout, 'Use Autosave', self, 'use_autosave')
+
+        row = layout.column()
+        row.enabled = self.use_autosave
+        utils.ui.draw_prop(row, 'Autosave Interval', self, 'autosave_interval')
+
+        row = layout.column()
+        row.enabled = self.use_autosave
+        utils.ui.draw_bool(row, 'Autosave to Copy', self, 'autosave_to_copy')
+
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
         utils.ui.draw_prop(layout, 'Increment Format', self, 'increment_format')
