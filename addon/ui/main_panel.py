@@ -69,11 +69,11 @@ def powersave_draw(self, column):
     column.separator()
 
     box = column.box().column()
-    row = box.row()
-    row.enabled = prefs.use_autosave
-    row.prop(prefs, 'autosave_interval')
     box.prop(prefs, 'use_autosave')
-    box.prop(prefs, 'autosave_to_copy')
+    col = box.column()
+    col.enabled = prefs.use_autosave
+    col.prop(prefs, 'autosave_interval')
+    col.prop(prefs, 'autosave_to_copy')
     box.prop(prefs, 'save_on_startup')
 
     column.separator()
