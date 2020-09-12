@@ -50,11 +50,8 @@ def powersave_draw(self, column):
     filepaths = bpy.context.preferences.filepaths
 
     box = column.box().column()
-    if hops_prefs():
-        try:
-            box.operator('hops.powersave', text='PowerSave (hops)')
-        except:
-            box.operator('powersave.powersave')
+    if hasattr(bpy.types, 'HOPS_OT_powersave'):
+        box.operator('hops.powersave', text='PowerSave (hops)')
     else:
         box.operator('powersave.powersave')
     box.prop(prefs, 'powersave_name', text='')
@@ -108,9 +105,3 @@ def powerlink_draw(self, column):
 
         url = 'https://blendermarket.com/products/powerlink'
         utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
-
-
-def hops_prefs():
-    wm = bpy.context.window_manager
-    if hasattr(wm, 'Hard_Ops_folder_name'):
-        return bpy.context.preferences.addons[wm.Hard_Ops_folder_name].preferences
