@@ -19,15 +19,14 @@ class PowerSavePanel(bpy.types.Panel):
         if self.is_popover:
             layout.ui_units_x = prefs.popover_width
 
-            if prefs.panel_tab == 'POWERSAVE':
-                text = 'PowerSave'
-            elif prefs.panel_tab == 'POWERLINK':
-                text = 'PowerLink'
-            else:
-                text = 'Unknown'
+            panel_dict = {
+                'POWERSAVE': 'PowerSave',
+                'POWERLINK': 'PowerLink',
+                'POWERBACKUP': 'PowerBackup',
+            }
 
             row = column.row()
-            row.label(text=text)
+            row.label(text=panel_dict.get(prefs.panel_tab, 'Unknown'))
             row.prop(prefs, 'panel_tab', expand=True, icon_only=True)
             column.separator()
 
@@ -36,6 +35,9 @@ class PowerSavePanel(bpy.types.Panel):
 
         elif prefs.panel_tab == 'POWERLINK':
             powerlink_draw(self, column)
+
+        elif prefs.panel_tab == 'POWERBACKUP':
+            powerbackup_draw(self, column)
 
 
 def popover(self, context):
@@ -103,4 +105,20 @@ def powerlink_draw(self, column):
         utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
 
         url = 'https://blendermarket.com/products/powerlink'
+        utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
+
+
+def powerbackup_draw(self, column):
+    wm = bpy.context.window_manager
+    if hasattr(wm, 'powerbackup'):
+        wm.powerbackup.draw(self, column)
+
+    else:
+        box = column.box().column()
+        box.label(text='Check out PowerBackup!')
+
+        url = 'https://gumroad.com/l/powerbackup'
+        utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
+
+        url = 'https://blendermarket.com/products/powerbackup'
         utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
