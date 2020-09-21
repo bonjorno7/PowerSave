@@ -96,7 +96,6 @@ def powerlink_draw(self, column):
         wm.powerlink.draw(self, column)
 
     else:
-        column.separator()
         box = column.box().column()
         box.label(text='Check out PowerLink!')
 
