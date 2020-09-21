@@ -1,5 +1,6 @@
 import bpy
 from .. import utils
+from ..ui.main_panel import powersave_draw
 
 
 name = __name__.partition('.')[0]
@@ -15,3 +16,10 @@ class PowerSaveProps(bpy.types.PropertyGroup):
     @property
     def prefs(self):
         return utils.common.prefs()
+
+    @staticmethod
+    def draw(self, column):
+        powersave_draw(self, column)
+
+    def powersave(self):
+        return utils.save.powersave()
