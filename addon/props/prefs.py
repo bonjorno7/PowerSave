@@ -6,7 +6,8 @@ from .. import utils
 def panel_tab_items(self, context):
     powersave = ('POWERSAVE', 'PowerSave', '', icons.id('powersave'), 0)
     powerlink = ('POWERLINK', 'PowerLink', '', icons.id('powerlink'), 1)
-    return [powersave, powerlink]
+    powerbackup = ('POWERBACKUP', 'PowerBackup', '', icons.id('powerbackup'), 2)
+    return [powersave, powerlink, powerbackup]
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
