@@ -6,7 +6,7 @@ import pathlib
 pcoll = None
 
 
-def id(identifier):
+def id(identifier) -> bpy.types.ImagePreview:
     global pcoll
     return pcoll[identifier].icon_id
 

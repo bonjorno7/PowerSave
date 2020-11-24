@@ -7,35 +7,35 @@ from .. import utils
 from .. import ui
 
 
-def module():
+def module() -> str:
     return props.addon.name
 
 
-def prefs():
+def prefs() -> bpy.types.AddonPreferences:
     return bpy.context.preferences.addons[module()].preferences
 
 
-def description(*args):
+def description(*args) -> str:
     return '.\n'.join(args)
 
 
-def sanitize(text: str):
+def sanitize(text: str) -> str:
     return ''.join('_' if c in ':*?"<>|' else c for c in text)
 
 
-def date_time():
+def date_time() -> str:
     form = prefs().date_time_format
     form = datetime.datetime.now().strftime(form)
     return sanitize(form)
 
 
-def increment():
+def increment() -> str:
     form = sanitize(prefs().increment_format)
     numbers = re.findall(r'\d+', form)
     return form if numbers else f'{form}1'
 
 
-def date_time_increment():
+def date_time_increment() -> str:
     return f'{date_time()}{increment()}'
 
 

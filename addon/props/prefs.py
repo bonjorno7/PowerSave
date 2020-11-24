@@ -1,9 +1,10 @@
 import bpy
+import typing
 from .. import icons
 from .. import utils
 
 
-def panel_tab_items(self, context):
+def panel_tab_items(self, context) -> typing.List[typing.Tuple[str, str, str, bpy.types.ImagePreview, int]]:
     powersave = ('POWERSAVE', 'PowerSave', '', icons.id('powersave'), 0)
     powerlink = ('POWERLINK', 'PowerLink', '', icons.id('powerlink'), 1)
     powerbackup = ('POWERBACKUP', 'PowerBackup', '', icons.id('powerbackup'), 2)

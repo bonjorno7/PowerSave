@@ -1,4 +1,5 @@
 import bpy
+import typing
 from .. import utils
 from ..ui.main_panel import powersave_draw
 
@@ -14,12 +15,12 @@ class PowerSaveProps(bpy.types.PropertyGroup):
     )
 
     @property
-    def prefs(self):
+    def prefs(self) -> bpy.types.AddonPreferences:
         return utils.common.prefs()
 
     @staticmethod
     def draw(self, column):
         powersave_draw(self, column)
 
-    def powersave(self):
+    def powersave(self) -> typing.Tuple[set, str, set]:
         return utils.save.powersave()

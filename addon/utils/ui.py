@@ -10,7 +10,7 @@ icon_presets = {
 }
 
 
-def get_icon():
+def get_icon() -> bpy.types.ImagePreview:
     icon_dict = icon_presets[utils.common.prefs().icon_preset]
 
     if bpy.data.is_saved:

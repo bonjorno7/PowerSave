@@ -3,7 +3,7 @@ import pathlib
 from .. import utils
 
 
-def autosave_timer():
+def autosave_timer() -> float:
     prefs = utils.common.prefs()
 
     if prefs.use_autosave and bpy.data.is_saved and bpy.data.is_dirty:

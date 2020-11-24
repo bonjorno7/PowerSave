@@ -1,23 +1,24 @@
 import bpy
 import pathlib
+import typing
 from .. import utils
 
 
-def sanitize_path(path: pathlib.Path):
+def sanitize_path(path: pathlib.Path) -> pathlib.Path:
     drive = pathlib.Path(path.drive)
     path = str(path)[len(path.drive):]
     path = utils.common.sanitize(path)
     return drive.joinpath(path).resolve()
 
 
-def increment_until_unique(path: pathlib.Path):
+def increment_until_unique(path: pathlib.Path) -> pathlib.Path:
     while path.is_file():
         path = utils.files.change_version(path, 1)
 
     return path
 
 
-def powersave():
+def powersave() -> typing.Tuple[set, str, set]:
     prefs = utils.common.prefs()
 
     if bpy.data.is_saved:

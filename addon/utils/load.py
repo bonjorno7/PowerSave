@@ -1,9 +1,10 @@
 import bpy
 import pathlib
+import typing
 from .. import utils
 
 
-def should_load_autosave():
+def should_load_autosave() -> typing.Union[bool, None]:
     current_path = utils.files.as_path(bpy.data.filepath)
     autosave_path = utils.files.with_autosave(current_path)
 
@@ -17,7 +18,7 @@ def should_load_autosave():
         return autosave_time > current_time
 
 
-def load_autosave():
+def load_autosave() -> typing.Tuple[set, str, set]:
     current_path = utils.files.as_path(bpy.data.filepath)
     autosave_path = utils.files.with_autosave(current_path)
 
@@ -37,13 +38,13 @@ def load_autosave():
     return ({'INFO'}, f'Loaded "{autosave_path.name}" as "{new_path.name}"', {'FINISHED'})
 
 
-def verify_version(direction):
+def verify_version(direction) -> typing.Union[pathlib.Path, bool]:
     path = utils.files.as_path(bpy.data.filepath)
     path = utils.files.change_version(path, direction)
     return path if path.is_file() else False
 
 
-def load_version(direction):
+def load_version(direction) -> typing.Tuple[set, str, set]:
     path = verify_version(direction)
 
     if not path:

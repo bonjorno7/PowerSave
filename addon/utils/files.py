@@ -3,10 +3,11 @@ import pathlib
 import sys
 import subprocess
 import re
+import typing
 from .. import utils
 
 
-def get_default_folder():
+def get_default_folder() -> str:
     return str(pathlib.Path.home().joinpath('PowerSave'))
 
 
@@ -30,7 +31,7 @@ def add_to_recent_files():
         print('Failed to add to recent files')
 
 
-def open_project_folder():
+def open_project_folder() -> typing.Tuple[set, str, set]:
     if not bpy.data.is_saved:
         return ({'WARNING'}, 'Unsaved file', {'CANCELLED'})
 
@@ -42,16 +43,16 @@ def open_project_folder():
     return ({'INFO'}, 'Opened project folder', {'FINISHED'})
 
 
-def as_path(path: str):
+def as_path(path: str) -> pathlib.Path:
     return pathlib.Path(path).resolve()
 
 
-def with_autosave(path: pathlib.Path):
+def with_autosave(path: pathlib.Path) -> pathlib.Path:
     stem = f'{path.stem}_autosave'
     return path.with_name(f'{stem}{path.suffix}')
 
 
-def change_version(path: pathlib.Path, direction: int):
+def change_version(path: pathlib.Path, direction: int) -> pathlib.Path:
     stem = path.stem
     numbers = re.findall(r'\d+', stem)
 

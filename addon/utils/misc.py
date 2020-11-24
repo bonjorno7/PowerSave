@@ -1,7 +1,8 @@
 import bpy
+import typing
 
 
-def purge_orphans():
+def purge_orphans() -> typing.Tuple[set, str, set]:
     names = dir(bpy.data)
     collections = []
 
