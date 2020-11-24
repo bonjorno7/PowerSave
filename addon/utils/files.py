@@ -8,7 +8,7 @@ from .. import utils
 
 
 def get_default_folder() -> str:
-    return str(pathlib.Path.home().joinpath('PowerSave'))
+    return str(utils.common.documents().joinpath('PowerSave'))
 
 
 def add_to_recent_files():
