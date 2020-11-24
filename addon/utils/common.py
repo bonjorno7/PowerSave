@@ -2,6 +2,8 @@ import bpy
 import datetime
 import re
 import pathlib
+import platform
+import ctypes.wintypes
 from .. import props
 from .. import utils
 from .. import ui
@@ -50,3 +52,12 @@ def update_panel_category(self, context):
     ui.main_panel.PowerSavePanel.bl_region_type = 'UI' if category else 'HEADER'
     bpy.utils.unregister_class(ui.main_panel.PowerSavePanel)
     bpy.utils.register_class(ui.main_panel.PowerSavePanel)
+
+
+def documents() -> pathlib.Path:
+    if platform.system() == 'Windows':
+        buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
+        ctypes.windll.shell32.SHGetFolderPathW(None, 5, None, 1, buf)
+        return pathlib.Path(buf.value)
+    else:
+        return pathlib.Path.home()
