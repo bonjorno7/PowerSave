@@ -3,7 +3,6 @@ import datetime
 import re
 import pathlib
 import platform
-import ctypes.wintypes
 from .. import props
 from .. import utils
 from .. import ui
@@ -56,6 +55,7 @@ def update_panel_category(self, context):
 
 def documents() -> pathlib.Path:
     if platform.system() == 'Windows':
+        import ctypes.wintypes
         buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
         ctypes.windll.shell32.SHGetFolderPathW(None, 5, None, 1, buf)
         return pathlib.Path(buf.value)
