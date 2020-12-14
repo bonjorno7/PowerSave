@@ -23,6 +23,7 @@ class PowerSavePanel(bpy.types.Panel):
                 'POWERSAVE': 'PowerSave',
                 'POWERLINK': 'PowerLink',
                 'POWERBACKUP': 'PowerBackup',
+                'POWERMANAGE': 'PowerManage',
             }
 
             row = column.row()
@@ -38,6 +39,9 @@ class PowerSavePanel(bpy.types.Panel):
 
         elif prefs.panel_tab == 'POWERBACKUP':
             powerbackup_draw(self, column)
+
+        elif prefs.panel_tab == 'POWERMANAGE':
+            powermanage_draw(column)
 
 
 def popover(self, context):
@@ -121,4 +125,20 @@ def powerbackup_draw(self, column):
         utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
 
         url = 'https://blendermarket.com/products/powerbackup'
+        utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
+
+
+def powermanage_draw(column):
+    wm = bpy.context.window_manager
+    if hasattr(wm, 'powermanage'):
+        wm.powermanage.draw_panel(column)
+
+    else:
+        box = column.box().column()
+        box.label(text='Check out PowerManage!')
+
+        url = 'https://gumroad.com/l/powermanage'
+        utils.ui.draw_op(box, 'Gumroad', 'wm.url_open', {'url': url})
+
+        url = 'https://blendermarket.com/products/powermanage'
         utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
