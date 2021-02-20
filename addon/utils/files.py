@@ -1,7 +1,5 @@
 import bpy
 import pathlib
-import sys
-import subprocess
 import re
 import typing
 from .. import utils

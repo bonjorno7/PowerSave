@@ -1,5 +1,4 @@
 import bpy
-import pathlib
 from .. import utils
 
 

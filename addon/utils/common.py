@@ -4,7 +4,6 @@ import re
 import pathlib
 import platform
 from .. import props
-from .. import utils
 from .. import ui
 
 
