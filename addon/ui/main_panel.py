@@ -77,7 +77,6 @@ def powersave_draw(self, column):
     col = box.column()
     col.enabled = prefs.use_autosave
     col.prop(prefs, 'autosave_interval')
-    box.prop(prefs, 'save_on_startup')
 
     column.separator()
 
