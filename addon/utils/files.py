@@ -59,6 +59,19 @@ def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
     return folder.joinpath(path.name)
 
 
+def sanitize_autosave_folder(self, context):
+    if not self.autosave_folder:
+        self['autosave_folder'] = '//'
+
+    elif not self.autosave_folder.startswith('//'):
+        autosave_folder = as_path(self.autosave_folder)
+
+        if autosave_folder.is_absolute():
+            self['autosave_folder'] = str(autosave_folder)
+        else:
+            self['autosave_folder'] = f'//{autosave_folder}'
+
+ 
 def change_version(path: pathlib.Path, direction: int) -> pathlib.Path:
     stem = path.stem
     numbers = re.findall(r'\d+', stem)

@@ -38,8 +38,10 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     autosave_folder: bpy.props.StringProperty(
         name='Autosave Folder',
-        description='Where to autosave, supports relative paths with //',
+        description='Supports relative paths starting with two forward slashes, can save over the current file',
         default='//',
+        subtype='DIR_PATH',
+        update=utils.files.sanitize_autosave_folder,
     )
 
     save_on_startup: bpy.props.BoolProperty(
