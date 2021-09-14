@@ -36,10 +36,10 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         max=60,
     )
 
-    autosave_to_copy: bpy.props.BoolProperty(
-        name='Autosave to Copy',
-        description='Whether to autosave to a separate _autosave file',
-        default=False,
+    autosave_folder: bpy.props.StringProperty(
+        name='Autosave Folder',
+        description='Where to autosave, supports relative paths with //',
+        default='//',
     )
 
     save_on_startup: bpy.props.BoolProperty(
@@ -114,7 +114,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
         row = layout.column()
         row.enabled = self.use_autosave
-        utils.ui.draw_bool(row, 'Autosave to Copy', self, 'autosave_to_copy')
+        utils.ui.draw_prop(row, 'Autosave Folder', self, 'autosave_folder')
 
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')

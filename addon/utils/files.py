@@ -45,9 +45,18 @@ def as_path(path: str) -> pathlib.Path:
     return pathlib.Path(path).resolve()
 
 
-def with_autosave(path: pathlib.Path) -> pathlib.Path:
-    stem = f'{path.stem}_autosave'
-    return path.with_name(f'{stem}{path.suffix}')
+def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
+    prefs = utils.common.prefs()
+    folder = as_path(bpy.path.abspath(prefs.autosave_folder))
+
+    if mkdir:
+        try:
+            folder.mkdir(parents=True, exist_ok=True)
+        except:
+            print(f'Unable to create autosave folder "{folder}"')
+            return path
+
+    return folder.joinpath(path.name)
 
 
 def change_version(path: pathlib.Path, direction: int) -> pathlib.Path:

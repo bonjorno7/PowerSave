@@ -6,13 +6,12 @@ from .. import utils
 
 def should_load_autosave() -> typing.Union[bool, None]:
     current_path = utils.files.as_path(bpy.data.filepath)
-    autosave_path = utils.files.with_autosave(current_path)
+    autosave_path = utils.files.as_autosave(current_path)
 
-    current_exists = current_path.is_file()
-    autosave_exists = autosave_path.is_file()
-    is_autosave = current_path.stem.endswith('_autosave')
+    if current_path == autosave_path:
+        return False
 
-    if current_exists and autosave_exists and not is_autosave:
+    if current_path.is_file() and autosave_path.is_file():
         current_time = current_path.stat().st_mtime_ns
         autosave_time = autosave_path.stat().st_mtime_ns
         return autosave_time > current_time
@@ -20,7 +19,7 @@ def should_load_autosave() -> typing.Union[bool, None]:
 
 def load_autosave() -> typing.Tuple[set, str, set]:
     current_path = utils.files.as_path(bpy.data.filepath)
-    autosave_path = utils.files.with_autosave(current_path)
+    autosave_path = utils.files.as_autosave(current_path)
 
     try:
         bpy.ops.wm.open_mainfile(filepath=str(autosave_path))
