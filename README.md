@@ -1,4 +1,5 @@
 # PowerSave
+A powerful saving tool.
 
 ## Installation
 Go to Blender preferences, Add-ons, then click `Install...` and choose the zip file.  
