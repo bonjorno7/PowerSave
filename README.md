@@ -23,3 +23,8 @@ It autosaves to the `Autosave Folder` you set in the PowerSave preferences.
 Both absolute and relative paths are supported, and it can save over the current file.  
 If you open a file and there is a newer autosave available, you will be prompted to open it.  
 If you click OK on that prompt, it will open the autosave and save it as an increment of your original file.  
+
+## Links
+- [PowerSave on GitHub](https://github.com/bonjorno7/PowerSave)
+- [PowerSave on Gumroad](https://bonjorno7.gumroad.com/l/powersave)
+- [PowerSave on BlenderMarket](https://blendermarket.com/products/powersave)
