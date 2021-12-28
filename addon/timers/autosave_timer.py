@@ -7,7 +7,7 @@ def autosave_timer() -> float:
 
     if prefs.use_autosave and bpy.data.is_saved and bpy.data.is_dirty:
         scene = bpy.context.scene
-        if 'bc' in scene and scene.bc.running:
+        if hasattr(scene, 'bc') and scene.bc.running:
             return 1
 
         current_path = utils.files.as_path(bpy.data.filepath)
