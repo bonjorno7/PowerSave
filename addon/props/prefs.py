@@ -41,7 +41,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         description='Where to autosave and how to name the files',
         items=[
             ('OVERWRITE', 'Overwrite', 'Autosave over the original file'),
-            ('EXTENSION', 'Extension', 'Autosave with the .autosave extension'),
+            ('EXTENSION', 'Extension', 'Autosave with the .blend.autosave extension'),
             ('CUSTOM', 'Custom', 'Autosave with a custom folder and file name'),
         ],
         default='EXTENSION',

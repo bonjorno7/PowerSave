@@ -52,7 +52,7 @@ def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
         return path
 
     elif prefs.autosave_format == 'EXTENSION':
-        return path.with_suffix('.autosave')
+        return path.with_suffix('.blend.autosave')
 
     elif prefs.autosave_format == 'CUSTOM':
         folder = as_path(bpy.path.abspath(prefs.autosave_folder))
@@ -62,8 +62,8 @@ def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
                 folder.mkdir(parents=True, exist_ok=True)
             except:
                 print(f'Unable to create autosave folder "{folder}"')
-                print('Falling back to saving with .autosave extension')
-                return path.with_suffix('.autosave')
+                print('Falling back to saving with .blend.autosave extension')
+                return path.with_suffix('.blend.autosave')
 
         return folder.joinpath(prefs.autosave_name.replace('{name}', path.stem))
 
