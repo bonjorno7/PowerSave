@@ -19,8 +19,18 @@ You can use slash to create a directory within your `Base Folder` or current dir
 The arrow icons open the previous/next iteration of your project.  
 
 The `Autosave Interval` is how many minutes to wait between autosaves.  
-It autosaves to the `Autosave Folder` you set in the PowerSave preferences.  
-Both absolute and relative paths are supported, and it can save over the current file.  
+The `Autosave Format` lets you choose one of five options:  
+
+- `Overwrite` - Autosave over the original file
+- `Extension` - Autosave with the ".blend.autosave" extension
+- `Suffix` - Autosave with the "_autosave" suffix
+- `Folder` - Autosave in the "autosave" subfolder
+- `Custom` - Autosave with a custom folder and file name
+
+When using `Custom`, it uses the `Autosave Folder` and `Autosave Name` you set in the PowerSave preferences.  
+The `Autosave Folder` can use both absolute and relative paths.  
+The `Autosave Name` replaces `{name}` with the file name without extension.  
+
 If you open a file and there is a newer autosave available, you will be prompted to open it.  
 If you click OK on that prompt, it will open the autosave and save it as an increment of your original file.  
 
