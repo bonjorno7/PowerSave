@@ -47,19 +47,28 @@ def as_path(path: str) -> pathlib.Path:
 
 def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
     prefs = utils.common.prefs()
-    folder = as_path(bpy.path.abspath(prefs.autosave_folder))
 
-    if mkdir:
-        try:
-            folder.mkdir(parents=True, exist_ok=True)
-        except:
-            print(f'Unable to create autosave folder "{folder}"')
-            return path
+    if prefs.autosave_format == 'OVERWRITE':
+        return path
 
-    return folder.joinpath(path.name)
+    elif prefs.autosave_format == 'EXTENSION':
+        return path.with_suffix('.autosave')
+
+    elif prefs.autosave_format == 'CUSTOM':
+        folder = as_path(bpy.path.abspath(prefs.autosave_folder))
+
+        if mkdir:
+            try:
+                folder.mkdir(parents=True, exist_ok=True)
+            except:
+                print(f'Unable to create autosave folder "{folder}"')
+                print('Falling back to saving with .autosave extension')
+                return path.with_suffix('.autosave')
+
+        return folder.joinpath(prefs.autosave_name.replace('{name}', path.stem))
 
 
-def sanitize_autosave_folder(self, context):
+def sanitize_autosave_folder(self, context: bpy.types.Context):
     if not self.autosave_folder:
         self['autosave_folder'] = '//'
 
@@ -71,7 +80,18 @@ def sanitize_autosave_folder(self, context):
         else:
             self['autosave_folder'] = f'//{autosave_folder}'
 
- 
+
+def sanitize_autosave_name(self, context: bpy.types.Context):
+    if not self.autosave_name:
+        self['autosave_name'] = '{name}.blend'
+
+    elif '/' in self.autosave_name or '\\' in self.autosave_name:
+        index = max(self.autosave_name.rfind('/'), self.autosave_name.rfind('\\'))
+
+        if index != -1:
+            self['autosave_name'] = self.autosave_name[index + 1:]
+
+
 def change_version(path: pathlib.Path, direction: int) -> pathlib.Path:
     stem = path.stem
     numbers = re.findall(r'\d+', stem)

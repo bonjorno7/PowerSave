@@ -36,12 +36,30 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         max=60,
     )
 
+    autosave_format: bpy.props.EnumProperty(
+        name='Autosave Format',
+        description='Where to autosave and how to name the files',
+        items=[
+            ('OVERWRITE', 'Overwrite', 'Autosave over the original file'),
+            ('EXTENSION', 'Extension', 'Autosave with the .autosave extension'),
+            ('CUSTOM', 'Custom', 'Autosave with a custom folder and file name'),
+        ],
+        default='EXTENSION',
+    )
+
     autosave_folder: bpy.props.StringProperty(
         name='Autosave Folder',
-        description='Supports relative paths starting with two forward slashes, can save over the current file',
+        description='Supports relative paths starting with two forward slashes',
         default='//',
         subtype='DIR_PATH',
         update=utils.files.sanitize_autosave_folder,
+    )
+
+    autosave_name: bpy.props.StringProperty(
+        name='Autosave Name',
+        description='{name} is replaced with the file name without extension',
+        default='{name}.blend',
+        update=utils.files.sanitize_autosave_name,
     )
 
     save_on_startup: bpy.props.BoolProperty(
@@ -110,13 +128,21 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
         utils.ui.draw_bool(layout, 'Use Autosave', self, 'use_autosave')
 
-        row = layout.column()
-        row.enabled = self.use_autosave
-        utils.ui.draw_prop(row, 'Autosave Interval', self, 'autosave_interval')
+        col = layout.column()
+        col.enabled = self.use_autosave
+        utils.ui.draw_prop(col, 'Autosave Interval', self, 'autosave_interval')
 
-        row = layout.column()
-        row.enabled = self.use_autosave
-        utils.ui.draw_prop(row, 'Autosave Folder', self, 'autosave_folder')
+        col = layout.column()
+        col.enabled = self.use_autosave
+        utils.ui.draw_prop(col, 'Autosave Format', self, 'autosave_format')
+
+        col = layout.column()
+        col.enabled = self.use_autosave and self.autosave_format == 'CUSTOM'
+        utils.ui.draw_prop(col, 'Autosave Folder', self, 'autosave_folder')
+
+        col = layout.column()
+        col.enabled = self.use_autosave and self.autosave_format == 'CUSTOM'
+        utils.ui.draw_prop(col, 'Autosave Name', self, 'autosave_name')
 
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
