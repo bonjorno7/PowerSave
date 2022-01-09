@@ -46,7 +46,7 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
             ('FOLDER', 'Folder', 'Autosave in the "autosave" subfolder'),
             ('CUSTOM', 'Custom', 'Autosave with a custom folder and file name'),
         ],
-        default='EXTENSION',
+        default='OVERWRITE',
     )
 
     autosave_folder: bpy.props.StringProperty(
