@@ -77,6 +77,11 @@ def powersave_draw(self, column):
     col = box.column()
     col.enabled = prefs.use_autosave
     col.prop(prefs, 'autosave_interval')
+    row = col.row(align=True)
+    row.prop(prefs, 'autosave_format', text='')
+    if prefs.autosave_format == 'CUSTOM':
+        op = row.operator('preferences.addon_show', icon='PREFERENCES', text='')
+        op.module = utils.common.module()
 
     column.separator()
 
