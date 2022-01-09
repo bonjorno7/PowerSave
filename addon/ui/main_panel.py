@@ -45,7 +45,7 @@ class PowerSavePanel(bpy.types.Panel):
 
 
 def popover(self, context):
-    layout = self.layout
+    layout = self.layout.row(align=False)
     panel = PowerSavePanel.bl_idname
     icon = utils.ui.get_icon()
     layout.popover(panel, text='', icon_value=icon)
