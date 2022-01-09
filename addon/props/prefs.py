@@ -38,10 +38,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
 
     autosave_format: bpy.props.EnumProperty(
         name='Autosave Format',
-        description='Where to autosave and how to name the files',
+        description='Where to autosave and how to name the file',
         items=[
             ('OVERWRITE', 'Overwrite', 'Autosave over the original file'),
-            ('EXTENSION', 'Extension', 'Autosave with the .blend.autosave extension'),
+            ('EXTENSION', 'Extension', 'Autosave with the ".blend.autosave" extension'),
+            ('SUFFIX', 'Suffix', 'Autosave with the "_autosave" suffix'),
+            ('FOLDER', 'Folder', 'Autosave in the "autosave" subfolder'),
             ('CUSTOM', 'Custom', 'Autosave with a custom folder and file name'),
         ],
         default='EXTENSION',

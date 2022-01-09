@@ -45,6 +45,16 @@ def as_path(path: str) -> pathlib.Path:
     return pathlib.Path(path).resolve()
 
 
+def verify_folder(folder: pathlib.Path, mkdir: bool = False) -> bool:
+    if mkdir:
+        try:
+            folder.mkdir(parents=True, exist_ok=True)
+        except:
+            print(f'Unable to create autosave folder "{folder}"')
+
+    return folder.is_dir()
+
+
 def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
     prefs = utils.common.prefs()
 
@@ -54,18 +64,24 @@ def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
     elif prefs.autosave_format == 'EXTENSION':
         return path.with_suffix('.blend.autosave')
 
+    elif prefs.autosave_format == 'SUFFIX':
+        return path.with_stem(f'{path.stem}_autosave')
+
+    elif prefs.autosave_format == 'FOLDER':
+        folder = path.parent.joinpath('autosave')
+
+        if verify_folder(folder, mkdir):
+            return folder.joinpath(path.name)
+        else:
+            return path
+
     elif prefs.autosave_format == 'CUSTOM':
         folder = as_path(bpy.path.abspath(prefs.autosave_folder))
 
-        if mkdir:
-            try:
-                folder.mkdir(parents=True, exist_ok=True)
-            except:
-                print(f'Unable to create autosave folder "{folder}"')
-                print('Falling back to saving with .blend.autosave extension')
-                return path.with_suffix('.blend.autosave')
-
-        return folder.joinpath(prefs.autosave_name.replace('{name}', path.stem))
+        if verify_folder(folder, mkdir):
+            return folder.joinpath(prefs.autosave_name.replace('{name}', path.stem))
+        else:
+            return path
 
 
 def sanitize_autosave_folder(self, context: bpy.types.Context):
