@@ -51,7 +51,7 @@ def popover(self, context):
     layout.popover(panel, text='', icon_value=icon)
 
 
-def powersave_draw(self, column):
+def powersave_draw(self, column: bpy.types.UILayout):
     prefs = utils.common.prefs()
     filepaths = bpy.context.preferences.filepaths
 
@@ -99,7 +99,7 @@ def powersave_draw(self, column):
     box.prop(filepaths, 'save_version')
 
 
-def powerlink_draw(self, column):
+def powerlink_draw(self, column: bpy.types.UILayout):
     wm = bpy.context.window_manager
     if hasattr(wm, 'powerlink'):
         wm.powerlink.draw(self, column)
@@ -115,7 +115,7 @@ def powerlink_draw(self, column):
         utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
 
 
-def powerbackup_draw(self, column):
+def powerbackup_draw(self, column: bpy.types.UILayout):
     wm = bpy.context.window_manager
     if hasattr(wm, 'powerbackup'):
         wm.powerbackup.draw(self, column)
@@ -131,7 +131,7 @@ def powerbackup_draw(self, column):
         utils.ui.draw_op(box, 'BlenderMarket', 'wm.url_open', {'url': url})
 
 
-def powermanage_draw(column):
+def powermanage_draw(column: bpy.types.UILayout):
     wm = bpy.context.window_manager
     if hasattr(wm, 'powermanage'):
         wm.powermanage.draw_panel(column)
