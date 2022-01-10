@@ -1,6 +1,7 @@
 import bpy
 import pathlib
 import re
+import traceback
 import typing
 from .. import utils
 
@@ -24,6 +25,7 @@ def add_to_recent_files():
             recent_files.writelines(lines)
 
     except:
+        traceback.print_exc()
         print('Failed to add to recent files')
 
 
@@ -34,6 +36,7 @@ def open_project_folder() -> typing.Tuple[set, str, set]:
     try:
         bpy.ops.wm.path_open(filepath=str(pathlib.Path(bpy.data.filepath).parent))
     except:
+        traceback.print_exc()
         return ({'ERROR'}, 'Failed to open project folder', {'CANCELLED'})
 
     return ({'INFO'}, 'Opened project folder', {'FINISHED'})
@@ -48,6 +51,7 @@ def verify_folder(folder: pathlib.Path, mkdir: bool = False) -> bool:
         try:
             folder.mkdir(parents=True, exist_ok=True)
         except:
+            traceback.print_exc()
             print(f'Unable to create autosave folder "{folder}"')
 
     return folder.is_dir()
