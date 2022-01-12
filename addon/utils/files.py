@@ -22,7 +22,7 @@ def add_to_recent_files():
                     lines.append(line)
 
             recent_files.seek(0, 0)
-            recent_files.writelines(lines)
+            recent_files.write('\n'.join(lines))
 
     except:
         traceback.print_exc()
