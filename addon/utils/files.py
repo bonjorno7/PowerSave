@@ -69,7 +69,7 @@ def as_autosave(path: pathlib.Path, mkdir: bool = False) -> pathlib.Path:
         return path.with_suffix('.blend.autosave')
 
     elif prefs.autosave_format == 'SUFFIX':
-        return path.with_stem(f'{path.stem}_autosave')
+        return path.with_name(f'{path.stem}_autosave.blend')
 
     elif prefs.autosave_format == 'FOLDER':
         folder = path.parent.joinpath('autosave')
@@ -128,7 +128,7 @@ def increment_version(path: pathlib.Path) -> pathlib.Path:
         digits = len(match.group())
         increment = number.zfill(digits)
 
-    return path.with_stem(f'{stem}{increment}')
+    return path.with_name(f'{stem}{increment}.blend')
 
 
 def find_version(path: pathlib.Path, direction: int) -> typing.Union[pathlib.Path, None]:
@@ -142,7 +142,7 @@ def find_version(path: pathlib.Path, direction: int) -> typing.Union[pathlib.Pat
 
         for zeros in range(max(1, digits - 1), digits + 2):
             increment = number.zfill(zeros)
-            path = path.with_stem(f'{stem}{increment}')
+            path = path.with_name(f'{stem}{increment}.blend')
 
             if path.is_file():
                 return path
