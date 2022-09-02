@@ -17,6 +17,6 @@ def autosave_timer() -> float:
     if prefs.autosave_external_text:
         for text in bpy.data.texts.values():
             if not text.is_in_memory and text.is_dirty:
-                utils.common.override(bpy.context, {'edit_text': text}, bpy.ops.text.save)
+                utils.common.context_override(bpy.context, {'edit_text': text}, bpy.ops.text.save)
 
     return prefs.autosave_interval * 60

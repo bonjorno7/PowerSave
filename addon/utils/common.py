@@ -58,7 +58,7 @@ def update_panel_category(self, context):
     bpy.utils.register_class(ui.main_panel.PowerSavePanel)
 
 
-def override(
+def context_override(
     context: bpy.types.Context,
     override: dict,
     operator: typing.Callable,
