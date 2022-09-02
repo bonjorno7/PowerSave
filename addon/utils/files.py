@@ -113,7 +113,12 @@ def sanitize_autosave_name(self, context: bpy.types.Context):
 def increment_version(path: pathlib.Path) -> pathlib.Path:
     stem = path.stem
     increment = utils.common.increment()
-    match = re.search(r'\d+$', stem)
+
+    if utils.common.prefs().increment_strict:
+        separator = re.sub(r'\d+$', '', increment)
+        match = re.search(fr'(?<={separator})\d+$', stem)
+    else:
+        match = re.search(r'\d+$', stem)
 
     if match:
         stem = stem[:match.start()]
