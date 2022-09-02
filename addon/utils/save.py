@@ -13,7 +13,7 @@ def sanitize_path(path: pathlib.Path) -> pathlib.Path:
 
 def increment_until_unique(path: pathlib.Path) -> pathlib.Path:
     while path.is_file():
-        path = utils.files.change_version(path, 1)
+        path = utils.files.increment_version(path)
 
     return path
 

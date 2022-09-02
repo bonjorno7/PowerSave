@@ -37,16 +37,13 @@ def load_autosave() -> typing.Tuple[set, str, set]:
     return ({'INFO'}, f'Loaded "{autosave_path.name}" as "{new_path.name}"', {'FINISHED'})
 
 
-def verify_version(direction) -> typing.Union[pathlib.Path, bool]:
+def verify_version(direction) -> typing.Union[pathlib.Path, None]:
     path = utils.files.as_path(bpy.data.filepath)
 
     if path.is_file():
-        path = utils.files.change_version(path, direction)
+        return utils.files.find_version(path, direction)
 
-        if path.is_file():
-            return path
-
-    return False
+    return None
 
 
 def load_version(direction) -> typing.Tuple[set, str, set]:
