@@ -25,8 +25,8 @@ def get_icon() -> bpy.types.ImagePreview:
 
 
 def tag_redraw():
-    for window in bpy.context.window_manager.windows:
-        for area in window.screen.areas:
+    for window in bpy.context.window_manager.windows.values():
+        for area in window.screen.areas.values():
             if area.type == 'VIEW_3D':
                 area.tag_redraw()
 
