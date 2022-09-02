@@ -31,8 +31,13 @@ def date_time() -> str:
 
 def increment() -> str:
     form = sanitize(prefs().increment_format)
-    numbers = re.findall(r'\d+', form)
-    return form if numbers else f'{form}1'
+    match = re.search(r'\d+$', form)
+
+    if match:
+        number = '1'.zfill(len(match.group()))
+        return re.sub(r'\d+$', number, form)
+    else:
+        return f'{form}1'
 
 
 def date_time_increment() -> str:
