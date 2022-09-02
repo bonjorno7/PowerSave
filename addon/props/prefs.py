@@ -63,6 +63,12 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         update=utils.files.sanitize_autosave_name,
     )
 
+    autosave_external_text: bpy.props.BoolProperty(
+        name='Autosave External Text',
+        description='Autosave external text files you have open in Blender',
+        default=False,
+    )
+
     save_on_startup: bpy.props.BoolProperty(
         name='Save on Startup',
         description='Whether to save new projects in your base folder automatically',
@@ -150,6 +156,10 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         col = layout.column()
         col.enabled = self.use_autosave and self.autosave_format == 'CUSTOM'
         utils.ui.draw_prop(col, 'Autosave Name', self, 'autosave_name')
+
+        col = layout.column()
+        col.enabled = self.use_autosave
+        utils.ui.draw_bool(col, 'Autosave External Text', self, 'autosave_external_text')
 
         utils.ui.draw_bool(layout, 'Save On Startup', self, 'save_on_startup')
         utils.ui.draw_prop(layout, 'Date Time Format', self, 'date_time_format')
