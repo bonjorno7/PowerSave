@@ -53,7 +53,7 @@ def load_version(direction) -> typing.Tuple[set, str, set]:
     path = verify_version(direction)
 
     if not path:
-        return ({'ERROR'}, f'File "{path.name}" does not exist', {'CANCELLED'})
+        return ({'ERROR'}, f'File version does not exist', {'CANCELLED'})
 
     if bpy.data.is_saved and bpy.data.is_dirty:
         try:
