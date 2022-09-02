@@ -24,6 +24,8 @@ def add_to_recent_files():
             recent_files.seek(0, 0)
             recent_files.write('\n'.join(lines))
 
+        bpy.ops.wm.read_history()
+
     except:
         traceback.print_exc()
         print('Failed to add to recent files')
