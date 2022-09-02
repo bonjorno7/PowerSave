@@ -17,7 +17,7 @@ bl_info = {
     'author': 'bonjorno7, TeamC',
     'description': 'A powerful saving tool',
     'blender': (2, 80, 0),
-    'version': (0, 4, 3),
+    'version': (0, 4, 4),
     'location': 'View3D',
     'wiki_url': 'https://github.com/bonjorno7/PowerSave',
     'category': '3D View'
