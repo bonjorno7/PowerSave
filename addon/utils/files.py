@@ -112,6 +112,17 @@ def sanitize_autosave_name(self, context: bpy.types.Context):
             self['autosave_name'] = self.autosave_name[index + 1:]
 
 
+def sanitize_date_time_format(self, context: bpy.types.Context):
+    if not self.date_time_format:
+        self['date_time_format'] = '%A_%d-%B-%Y_%H.%M'
+    else:
+        self['date_time_format'] = utils.common.sanitize(self.date_time_format)
+
+
+def sanitize_increment_format(self, context: bpy.types.Context):
+    self['increment_format'] = utils.common.increment()
+
+
 def increment_version(path: pathlib.Path) -> pathlib.Path:
     stem = path.stem
     increment = utils.common.increment()
