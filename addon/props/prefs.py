@@ -9,7 +9,8 @@ def panel_tab_items(self, context) -> typing.List[typing.Tuple[str, str, str, bp
     powerlink = ('POWERLINK', 'PowerLink', '', icons.id('powerlink'), 1)
     powerbackup = ('POWERBACKUP', 'PowerBackup', '', icons.id('powerbackup'), 2)
     powermanage = ('POWERMANAGE', 'PowerManage', '', icons.id('powermanage'), 3)
-    return [powersave, powerlink, powerbackup, powermanage]
+    powerprops = ('POWERPROPS', 'PowerProps', '', icons.id('powerprops'), 4)
+    return [powersave, powerlink, powerbackup, powermanage, powerprops]
 
 
 class PowerSavePrefs(bpy.types.AddonPreferences):
