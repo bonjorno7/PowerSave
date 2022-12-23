@@ -92,7 +92,13 @@ def powersave_draw(self, column: bpy.types.UILayout):
     box = column.box().column()
     icon = 'CHECKBOX_HLT' if bpy.data.use_autopack else 'CHECKBOX_DEHLT'
     box.operator('file.autopack_toggle', text='Toggle Autopack', icon=icon)
-    box.operator('powersave.purge_orphans', text='Purge Orphans')
+    if bpy.app.version >= (2, 93, 0):
+        sub = box.row()
+        sub.operator_context = 'INVOKE_DEFAULT'
+        options = {'do_local_ids': True, 'do_linked_ids': True, 'do_recursive': True}
+        utils.ui.draw_op(sub, 'Purge Orphans', 'outliner.orphans_purge', options)
+    else:
+        box.operator('powersave.purge_orphans', text='Purge Orphans')
 
     column.separator()
     box = column.box().column()
