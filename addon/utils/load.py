@@ -52,12 +52,6 @@ def load_version(direction) -> typing.Tuple[set, str, set]:
     if not path:
         return ({'ERROR'}, f'File version does not exist', {'CANCELLED'})
 
-    if bpy.data.is_saved and bpy.data.is_dirty:
-        try:
-            bpy.ops.wm.save_mainfile(filepath=bpy.data.filepath)
-        except:
-            return ({'ERROR'}, f'Failed to save "{bpy.data.filepath}"', {'CANCELLED'})
-
     try:
         bpy.ops.wm.open_mainfile(filepath=str(path))
     except:

@@ -9,6 +9,10 @@ class LoadPrevious(bpy.types.Operator):
     bl_description = 'Load the previous iteration of this file'
 
 
+    def draw(self, context):
+        self.layout.label('This file has unsaved changes, are you sure you want to switch?')
+
+
     @classmethod
     def poll(cls, context):
         return utils.load.verify_version(-1)
@@ -18,3 +22,10 @@ class LoadPrevious(bpy.types.Operator):
         result = utils.load.load_version(-1)
         self.report(result[0], result[1])
         return result[2]
+
+
+    def invoke(self, context, event):
+        if bpy.data.is_saved and bpy.data.is_dirty:
+            return context.window_manager.invoke_props_dialog(self)
+        else:
+            return self.execute(context)
