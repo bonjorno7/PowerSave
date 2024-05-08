@@ -10,7 +10,9 @@ class LoadNext(bpy.types.Operator):
 
 
     def draw(self, context):
-        self.layout.label('This file has unsaved changes, are you sure you want to switch?')
+        col = self.layout.column()
+        col.label(text='This file has unsaved changes.')
+        col.label(text='Are you sure you want to switch?')
 
 
     @classmethod

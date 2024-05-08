@@ -10,7 +10,9 @@ class LoadAutosave(bpy.types.Operator):
 
 
     def draw(self, context):
-        self.layout.label(text='The autosave file is newer, would you like to load it?')
+        col = self.layout.column()
+        col.label(text='The autosave file is newer.')
+        col.label(text='Would you like to load it?')
 
 
     def execute(self, context):
