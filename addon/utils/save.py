@@ -1,5 +1,6 @@
 import bpy
 import pathlib
+import datetime
 import typing
 from .. import utils
 
@@ -25,6 +26,8 @@ def powersave() -> typing.Tuple[set, str, set]:
         path = pathlib.Path(bpy.data.filepath).parent
     else:
         path = pathlib.Path(prefs.base_folder)
+        if prefs.use_subfolder:
+            path = path.joinpath(datetime.datetime.now().strftime(prefs.subfolder_format))
 
     if bpy.data.is_saved and not prefs.powersave_name:
         utils.common.update_powersave_name()

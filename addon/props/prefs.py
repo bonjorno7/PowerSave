@@ -23,6 +23,21 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         subtype='DIR_PATH',
     )
 
+    use_subfolder: bpy.props.BoolProperty(
+        name='Use Subfolder',
+        description='When saving a new project, use a subfolder in the base folder',
+        default=False,
+    )
+
+    subfolder_format: bpy.props.StringProperty(
+        name='Subfolder Format',
+        description=utils.common.description(
+            'The formatting string used to create subfolder names',
+            'Read the datetime documentation for details',
+        ),
+        default='%m-%Y',
+    )
+
     use_autosave: bpy.props.BoolProperty(
         name='Use Autosave',
         description='Whether to periodically save the file',
@@ -142,24 +157,24 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout = self.layout
 
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
-        utils.ui.draw_bool(layout, 'Use Autosave', self, 'use_autosave')
+        utils.ui.draw_bool(layout, 'Use Subfolder', self, 'use_subfolder')
+        col = layout.column()
+        col.enabled = self.use_subfolder
+        utils.ui.draw_prop(col, 'Subfolder Format', self, 'subfolder_format')
 
+        utils.ui.draw_bool(layout, 'Use Autosave', self, 'use_autosave')
         col = layout.column()
         col.enabled = self.use_autosave
         utils.ui.draw_prop(col, 'Autosave Interval', self, 'autosave_interval')
-
         col = layout.column()
         col.enabled = self.use_autosave
         utils.ui.draw_prop(col, 'Autosave Format', self, 'autosave_format')
-
         col = layout.column()
         col.enabled = self.use_autosave and self.autosave_format == 'CUSTOM'
         utils.ui.draw_prop(col, 'Autosave Folder', self, 'autosave_folder')
-
         col = layout.column()
         col.enabled = self.use_autosave and self.autosave_format == 'CUSTOM'
         utils.ui.draw_prop(col, 'Autosave Name', self, 'autosave_name')
-
         col = layout.column()
         col.enabled = self.use_autosave
         utils.ui.draw_bool(col, 'Autosave External Text', self, 'autosave_external_text')
