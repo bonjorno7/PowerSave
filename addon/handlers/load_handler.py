@@ -6,8 +6,6 @@ from .. import utils
 def load_handler(_):
     utils.common.update_powersave_name()
     prefs = utils.common.prefs()
-    # update datetime
-    prefs.update_base_folder(bpy.context)
 
     if bpy.data.is_saved:
         if utils.load.should_load_autosave():
