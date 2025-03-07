@@ -2,6 +2,8 @@ import bpy
 import typing
 from .. import icons
 from .. import utils
+from datetime import datetime
+import os
 
 
 def panel_tab_items(self, context) -> typing.List[typing.Tuple[str, str, str, bpy.types.ImagePreview, int]]:
@@ -23,6 +25,50 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         subtype='DIR_PATH',
     )
 
+    # New property for sub folder
+    use_sub_folder: bpy.props.BoolProperty(
+        name='Use Sub Folder',
+        description='Add the current datetime (e.g. 03-2025) to the base folder path',
+        default=False,
+        update=lambda self, context: self.update_base_folder(context),
+    )
+
+    # New property for custom format
+    sub_folder_date_time_format: bpy.props.StringProperty(
+        name='Sub Folder Date Time Format',
+        description=utils.common.description(
+            'The format for the sub folder (default is %m-%Y)',
+            'Uncheck Use Sub Folder to edit',
+        ),
+        default='%m-%Y',
+        update=lambda self, context: self.update_base_folder(context),
+    )
+
+    def update_base_folder(self, context):
+        """Updates the base folder path by removing an existing date-based subfolder and appending a new one if necessary."""
+        current_date = datetime.now()
+        sub_folder = current_date.strftime(self.sub_folder_date_time_format)
+        
+        # Normalize and determine the last folder part
+        norm_base_folder = os.path.normpath(self.base_folder)
+        last_component = os.path.basename(norm_base_folder)
+        
+        # Check if the last folder part matches the date format
+        try:
+            datetime.strptime(last_component, self.sub_folder_date_time_format)
+            # This is an existing date-based subfolder – remove it
+            base_folder_without_date = os.path.dirname(norm_base_folder)
+        except ValueError:
+            # Last folder part is not a date in the defined format
+            base_folder_without_date = self.base_folder
+
+        if self.use_sub_folder:
+            # Add the new subfolder (based on the current date)
+            self.base_folder = os.path.join(base_folder_without_date, sub_folder)
+        else:
+            # Use only the base folder without date-based suffix
+            self.base_folder = base_folder_without_date
+    
     use_autosave: bpy.props.BoolProperty(
         name='Use Autosave',
         description='Whether to periodically save the file',
@@ -142,6 +188,11 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         layout = self.layout
 
         utils.ui.draw_prop(layout, 'Base Folder', self, 'base_folder')
+        utils.ui.draw_bool(layout, 'Use Sub Folder', self, 'use_sub_folder')
+        # Show sub-folder format, but read-only if "Use Sub Folder" is enabled
+        col = layout.column()
+        col.enabled = not self.use_sub_folder  # If 'use_sub_folder' is enabled, the field becomes read-only
+        utils.ui.draw_prop(col, 'Sub Folder Date Time Format', self, 'sub_folder_date_time_format')
         utils.ui.draw_bool(layout, 'Use Autosave', self, 'use_autosave')
 
         col = layout.column()
