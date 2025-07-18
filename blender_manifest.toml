@@ -1,0 +1,16 @@
+schema_version = "1.0.0"
+
+id = "powersave"
+version = "0.4.9"
+name = "PowerSave"
+tagline = "A powerful saving tool"
+maintainer = "bonjorno7, TeamC"
+website = "https://github.com/bonjorno7/PowerSave"
+
+type = "add-on"
+blender_version_min = "4.2.0"
+tags = ["System", "3D View"]
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Save and load blend files"
