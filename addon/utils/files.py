@@ -12,7 +12,10 @@ def get_default_folder() -> str:
 
 def add_to_recent_files():
     try:
-        with open(bpy.utils.user_resource('CONFIG', path='recent-files.txt'), 'r+') as recent_files:
+        path = pathlib.Path(bpy.utils.user_resource('CONFIG', path='recent-files.txt'))
+        path.touch()
+
+        with path.open('r+') as recent_files:
             lines = [bpy.data.filepath]
 
             for line in recent_files:
