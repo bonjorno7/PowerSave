@@ -2,7 +2,6 @@ import bpy
 from .. import utils
 from .. import icons
 
-
 icon_presets = {
     'DEFAULT': {'saved': 'green', 'dirty': 'gray', 'unsaved': 'red'},
     'TRAFFIC': {'saved': 'green', 'dirty': 'yellow', 'unsaved': 'red'},

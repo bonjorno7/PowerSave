@@ -3,7 +3,6 @@ import typing
 from .. import utils
 from ..ui.main_panel import powersave_draw
 
-
 name = __name__.partition('.')[0]
 
 
