@@ -2,8 +2,7 @@ import bpy
 import typing
 from .. import utils
 from ..ui.main_panel import powersave_draw
-
-name = __name__.partition('.')[0]
+from ... import __package__ as name
 
 
 class PowerSaveProps(bpy.types.PropertyGroup):
