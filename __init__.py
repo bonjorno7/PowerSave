@@ -11,6 +11,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+bl_info = {
+    'name': 'PowerSave',
+    'author': 'bonjorno7, TeamC',
+    'description': 'A powerful saving tool',
+    'blender': (2, 80, 0),
+    'version': (0, 5, 0),
+    'location': 'View3D',
+    'wiki_url': 'https://github.com/bonjorno7/PowerSave',
+    'category': '3D View'
+}
+
 from . import addon
 
 
