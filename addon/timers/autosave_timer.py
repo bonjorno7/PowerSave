@@ -12,7 +12,10 @@ def autosave_timer() -> float:
 
         current_path = utils.files.as_path(bpy.data.filepath)
         autosave_path = utils.files.as_autosave(current_path, mkdir=True)
+        save_version = bpy.context.preferences.filepaths.save_version
+        bpy.context.preferences.filepaths.save_version = prefs.autosave_versions
         bpy.ops.wm.save_as_mainfile(filepath=str(autosave_path), check_existing=False, copy=True)
+        bpy.context.preferences.filepaths.save_version = save_version
 
     if prefs.autosave_external_text:
         for text in bpy.data.texts.values():

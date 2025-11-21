@@ -52,6 +52,14 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         max=60,
     )
 
+    autosave_versions: bpy.props.IntProperty(
+        name='Autosave Versions',
+        description='The number of old versions to maintain, when autosaving',
+        default=0,
+        min=0,
+        max=32,
+    )
+
     autosave_format: bpy.props.EnumProperty(
         name='Autosave Format',
         items=[
@@ -166,6 +174,9 @@ class PowerSavePrefs(bpy.types.AddonPreferences):
         col = layout.column()
         col.enabled = self.use_autosave
         utils.ui.draw_prop(col, 'Autosave Interval', self, 'autosave_interval')
+        col = layout.column()
+        col.enabled = self.use_autosave
+        utils.ui.draw_prop(col, 'Autosave Versions', self, 'autosave_versions')
         col = layout.column()
         col.enabled = self.use_autosave
         utils.ui.draw_prop(col, 'Autosave Format', self, 'autosave_format')

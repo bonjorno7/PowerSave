@@ -80,6 +80,7 @@ def powersave_draw(self, column: bpy.types.UILayout):
     col = box.column()
     col.enabled = prefs.use_autosave
     col.prop(prefs, 'autosave_interval')
+    col.prop(prefs, 'autosave_versions')
     row = col.row(align=True)
     row.prop(prefs, 'autosave_format', text='')
     if prefs.autosave_format == 'CUSTOM':
