@@ -1,7 +1,7 @@
 schema_version = "1.0.0"
 
 id = "powersave"
-version = "0.5.0"
+version = "0.5.1"
 name = "PowerSave"
 tagline = "A powerful saving tool"
 maintainer = "bonjorno7, TeamC"
