@@ -19,6 +19,7 @@ You can use slash to create a directory within your `Base Folder` or current dir
 The arrow icons open the previous/next iteration of your project.  
 
 The `Autosave Interval` is how many minutes to wait between autosaves.  
+The `Autosave Versions` overwrites `Save Versions` when autosaving.  
 The `Autosave Format` lets you choose one of five options:  
 
 - `Overwrite` - Autosave over the original file
